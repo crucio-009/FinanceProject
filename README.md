@@ -1,2 +1,2 @@
 # FinanceProject
-Project for Oracle Training Completion
+Java Project for Oracle Training Completion 
