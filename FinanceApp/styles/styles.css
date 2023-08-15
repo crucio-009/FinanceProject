@@ -1,0 +1,124 @@
+body {
+    min-height: 100vh;
+}
+
+.head-container {
+    background-color: #001F3F;
+}
+
+.head-text {
+    color: #E5E5E5;
+}
+
+.head-text:hover{
+    color: #738292;
+}
+
+.head-btn {
+    background-color: #001F3F;
+    color: #E5E5E5;
+    border-color: #E5E5E5;
+}
+
+.head-btn:hover {
+    background-color: #E5E5E5;
+    color: #001F3F;
+    border-color: #001F3F;
+}
+
+.head-btn:checked+.head-btn, .head-btn.active, .head-btn.show, .head-btn:first-child:active, :not(.head-btn-check)+.head-btn:active {
+    background-color: #E5E5E5 !important;
+    color: #001F3F !important;
+    border-color: #001F3F !important;
+}
+
+.dropdown-item:active{
+    background-color: #001F3F !important;
+    color: #E5E5E5 !important;
+    border-color: #001F3F !important;
+}
+
+.hero {
+    background-color: #E5E5E5;
+    min-height: 100vh;
+}
+
+.hero-text {
+    color: #001F3F !important;
+    justify-content: center;
+}
+
+.signup-link {
+    background-color: #E5E5E5 !important;
+    color: #001F3F !important;
+}
+
+.signup-link:hover {
+  color: #738292 !important;
+}
+
+.tnc {
+  background-color: #E5E5E5 !important;
+  color: #001F3F !important;
+}
+
+.tnc:hover {
+color: #738292 !important;
+}
+
+.footer-container {
+    background-color: #001F3F;
+}
+
+.footer-text {
+    color:#E5E5E5 !important;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 1rem;
+  }
+  
+  .form-signin .form-floating:focus-within {
+    z-index: 2;
+  }
+
+  .form-signin input[type="top"] {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .form-select {
+    max-width: 330px;
+    padding: 1rem;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  
+  .form-signin select[type="gender"] {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .form-signin input[type="tel"] {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .form-signin input[type="email"] {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  
+  .form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  
