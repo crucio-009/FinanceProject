@@ -1,0 +1,5 @@
+package com.java.financeprojectapp.exceptions;
+
+public class DataAccessException {
+
+}

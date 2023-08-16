@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.java.financeapp.entities.Customer"/>
+    <fullyQualifiedTypeName name="com.java.financeapp.exceptions.DataAccessException"/>
+    <fullyQualifiedTypeName name="com.java.financeprojectapp.entities.Customer"/>
+    <fullyQualifiedTypeName name="com.java.financeprojectapp.exceptions.DataAccessException"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="jakarta.ws.rs.GET"/>
+    <fullyQualifiedTypeName name="jakarta.ws.rs.Path"/>
+    <fullyQualifiedTypeName name="jakarta.ws.rs.Produces"/>
+    <fullyQualifiedTypeName name="jakarta.ws.rs.core.MediaType"/>
+    <fullyQualifiedTypeName name="com.java.financeprojectapp.servicelayer.entities.ServiceResponse"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="jakarta.ws.rs.ext.Provider"/>
+    <fullyQualifiedTypeName name="jakarta.ws.rs.container.ContainerResponseFilter"/>
+    <fullyQualifiedTypeName name="jakarta.ws.rs.container.ContainerRequestContext"/>
+    <fullyQualifiedTypeName name="jakarta.ws.rs.container.ContainerResponseContext"/>
+    <fullyQualifiedTypeName name="com.java.financeprojectapp.dataaccess.DataAccess"/>
+    <fullyQualifiedTypeName name="jakarta.ws.rs.PathParam"/>
+</qualifiedTypeNameHistroy>

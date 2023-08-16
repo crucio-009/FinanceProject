@@ -1,0 +1,5 @@
+package com.java.financeprojectapp.entities;
+
+public class Customer {
+
+}

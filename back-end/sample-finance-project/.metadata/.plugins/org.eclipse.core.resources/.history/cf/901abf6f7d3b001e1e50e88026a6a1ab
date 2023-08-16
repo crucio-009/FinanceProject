@@ -1,0 +1,40 @@
+package com.java.financeapp.tests;
+
+
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import com.java.samplefinanceproject.exceptions.*;
+import com.java.samplefinanceproject.*;
+import com.java.samplefinanceproject.entities.Customer;
+
+public class UnitTests {
+	private static DataAccess dao;
+	
+	@BeforeClass
+	public static void initialize() {
+		dao = new DataAccess();
+	}
+	
+	@AfterClass
+	public static void cleanUp() {		
+		dao = null;
+	}
+	
+	@Test
+	public void fetchByIdPositiveTest() {
+		try {
+			// Product actualProduct = dao.fetchById(inputId);
+			Customer actualProduct = dao.fetchById(1);
+			Customer expectedProduct = new Customer(1, "likky", "M", "7416685123", "likky@gmail.com");
+			Assert.assertEquals(expectedProduct, actualProduct);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+	}
+	
+
+}
+

@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;FinanceProjectApp&apos;" deleteContents="true" description="Delete resource &apos;FinanceProjectApp&apos;" element1="/FinanceProjectApp" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1692125675768"/>&#x0A;<refactoring comment="Move 0 packages to &apos;FinanceApp/src&apos;&#x0D;&#x0A;- Destination element: &apos;FinanceApp/src&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move packages" destination="=FinanceApp/src" flags="589830" fragments="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.movePackages" stamp="1692125842695" version="1.0"/>
+</session>

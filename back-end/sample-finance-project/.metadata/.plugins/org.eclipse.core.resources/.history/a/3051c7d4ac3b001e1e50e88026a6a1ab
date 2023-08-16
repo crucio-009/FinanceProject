@@ -1,0 +1,27 @@
+package com.java.financeprojectapp.servicelayer.services;
+
+import com.java.financeprojectapp.servicelayer.entities.ServiceResponse;
+
+import java.util.List;
+
+import com.java.financeprojectapp.entities.*;
+
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+
+public class CustomerService {
+	
+	@GET
+	@Path("")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ServiceResponse<List<Customer>> retrieveAllProducts() {
+		try {
+			List<Customer> list = bo.getAll();
+			return new ServiceResponse<List<Customer>>("records found", 200, list);
+		} catch (Exception e) {
+			return new ServiceResponse<List<Customer>>(e.getMessage(), 200, null);
+		}
+	}
+}
