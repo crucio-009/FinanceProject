@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.java.financeprojectapp.businesslayer.implementations.LoanApplicationBusinessComponent;
 import com.java.financeprojectapp.entities.LoanApplication;
-import com.java.financeprojectapp.servicelayer.entities.*;
+import com.java.financeprojectapp.servicelayer.entities.ServiceResponse;
 
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -28,12 +28,11 @@ public class LoanApplicationService {
 		super();
 		this.labo = labo;
 	}
-	
 
 	@GET
 	@Path("/all")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Secured
+//	@Secured
 	public ServiceResponse<List<LoanApplication>> retrieveAllLoanApplications() {
 		try {
 			List<LoanApplication> list = labo.getAll();
@@ -42,12 +41,12 @@ public class LoanApplicationService {
 			return new ServiceResponse<List<LoanApplication>>(e.getMessage(), 200, null);
 		}
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Secured({Role.CUSTOMER})
-	public ServiceResponse<LoanApplication> retrieveLoanApplicationById(@PathParam("id") int id) throws Exception {
+//	@Secured({Role.CUSTOMER})
+	public ServiceResponse<LoanApplication> retrieveLoanApplicationById(@PathParam("id") String id) throws Exception {
 		try {
 			LoanApplication l = labo.getById(id);
 			return new ServiceResponse<LoanApplication>("record found", 200, l);
@@ -55,11 +54,12 @@ public class LoanApplicationService {
 			return new ServiceResponse<LoanApplication>(e.getMessage(), 500, null);
 		}
 	}
-	
+
 	@GET
 	@Path("/get")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ServiceResponse<List<LoanApplication>> retrieveLoanApplicationByDate(@QueryParam("date") String date) throws Exception {
+	public ServiceResponse<List<LoanApplication>> retrieveLoanApplicationByDate(@QueryParam("date") String date)
+			throws Exception {
 		try {
 			List<LoanApplication> list = labo.getLoanApplicationsByDate(date);
 			return new ServiceResponse<List<LoanApplication>>("records found", 200, list);
@@ -67,12 +67,24 @@ public class LoanApplicationService {
 			return new ServiceResponse<List<LoanApplication>>(e.getMessage(), 200, null);
 		}
 	}
-	
+
+	@GET
+	@Path("/get/pending")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ServiceResponse<List<LoanApplication>> retrievePendingApplications() throws Exception {
+		try {
+			List<LoanApplication> list = labo.getPendingApplications();
+			return new ServiceResponse<List<LoanApplication>>("records found", 200, list);
+		} catch (Exception e) {
+			return new ServiceResponse<List<LoanApplication>>(e.getMessage(), 200, null);
+		}
+	}
+
 	@POST
 	@Path("/add")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public ServiceResponse<Boolean> addCustomer(LoanApplication la) throws Exception {
+	public ServiceResponse<Boolean> addLoanApplication(LoanApplication la) throws Exception {
 		try {
 			Boolean flag = labo.add(la);
 			return new ServiceResponse<Boolean>("record added", 200, flag);
@@ -80,11 +92,11 @@ public class LoanApplicationService {
 			return new ServiceResponse<Boolean>(e.getMessage(), 500, null);
 		}
 	}
-	
+
 	@POST
 	@Path("/delete/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ServiceResponse<Boolean> deleteCustomer(@PathParam("id") int id) throws Exception {
+	public ServiceResponse<Boolean> deleteLoanApplication(@PathParam("id") String id) throws Exception {
 		try {
 			Boolean flag = labo.remove(id);
 			return new ServiceResponse<Boolean>("record deleted", 200, flag);
@@ -92,13 +104,27 @@ public class LoanApplicationService {
 			return new ServiceResponse<Boolean>(e.getMessage(), 500, null);
 		}
 	}
-	
+
 	@POST
 	@Path("/update/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ServiceResponse<Boolean> updateCustomer(@PathParam("id") int id, LoanApplication la) throws Exception {
+	public ServiceResponse<Boolean> updateLoanApplication(@PathParam("id") String id, LoanApplication la)
+			throws Exception {
 		try {
 			Boolean flag = labo.modify(id, la);
+			return new ServiceResponse<Boolean>("record updated", 200, flag);
+		} catch (Exception e) {
+			return new ServiceResponse<Boolean>(e.getMessage(), 500, null);
+		}
+	}
+
+	@POST
+	@Path("/updatestatus/{id}")
+	public ServiceResponse<Boolean> modifyApplicationStatus(@PathParam("id") String id,
+			@QueryParam("status") String status) throws Exception {
+		try {
+//			System.out.println(status);
+			Boolean flag = labo.modifyStatus(id, status);
 			return new ServiceResponse<Boolean>("record updated", 200, flag);
 		} catch (Exception e) {
 			return new ServiceResponse<Boolean>(e.getMessage(), 500, null);

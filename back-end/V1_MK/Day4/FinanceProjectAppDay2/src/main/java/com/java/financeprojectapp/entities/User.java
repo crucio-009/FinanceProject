@@ -8,7 +8,7 @@ public class User {
 
 	private String username;
 	private Set<Role> roles;
-	
+
 	public User(String username, Set<Role> roles) {
 		super();
 		this.setUsername(username);
@@ -33,5 +33,5 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-	
+
 }

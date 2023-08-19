@@ -11,7 +11,7 @@ import com.java.financeprojectapp.exceptions.DataAccessException;
 public class LoanApplicationBusinessComponent implements LoanApplicationBusinessComponentContract {
 
 	private LoanApplicationDataAccess lapdao = new LoanApplicationDataAccess();
-	
+
 	public LoanApplicationBusinessComponent() {
 		super();
 	}
@@ -20,7 +20,7 @@ public class LoanApplicationBusinessComponent implements LoanApplicationBusiness
 		super();
 		this.lapdao = lapdao;
 	}
-	
+
 	@Override
 	public List<LoanApplication> getAll() throws BusinessComponetException {
 		try {
@@ -42,7 +42,7 @@ public class LoanApplicationBusinessComponent implements LoanApplicationBusiness
 	}
 
 	@Override
-	public LoanApplication getById(Integer id) throws BusinessComponetException {
+	public LoanApplication getById(String id) throws BusinessComponetException {
 		try {
 			LoanApplication la = lapdao.fetchById(id);
 			if (la == null)
@@ -62,7 +62,7 @@ public class LoanApplicationBusinessComponent implements LoanApplicationBusiness
 	public Boolean add(LoanApplication data) throws BusinessComponetException {
 		try {
 			Boolean flag = lapdao.insert(data);
-			if(flag == null) {
+			if (flag == null) {
 				throw new BusinessComponetException("Loan Application details could not be added.");
 			} else {
 				return flag;
@@ -77,10 +77,10 @@ public class LoanApplicationBusinessComponent implements LoanApplicationBusiness
 	}
 
 	@Override
-	public Boolean remove(Integer id) throws BusinessComponetException {
+	public Boolean remove(String id) throws BusinessComponetException {
 		try {
 			Boolean flag = lapdao.delete(id);
-			if(flag == null) {
+			if (flag == null) {
 				throw new BusinessComponetException("Loan Application details could not be deleted");
 			} else {
 				return flag;
@@ -95,10 +95,10 @@ public class LoanApplicationBusinessComponent implements LoanApplicationBusiness
 	}
 
 	@Override
-	public Boolean modify(Integer id, LoanApplication data) throws BusinessComponetException {
+	public Boolean modify(String id, LoanApplication data) throws BusinessComponetException {
 		try {
 			Boolean flag = lapdao.update(id, data);
-			if(flag == null) {
+			if (flag == null) {
 				throw new BusinessComponetException("Loan Application details could not be modified");
 			} else {
 				return flag;
@@ -120,6 +120,44 @@ public class LoanApplicationBusinessComponent implements LoanApplicationBusiness
 				throw new BusinessComponetException("Something went wrong...Try later");
 			} else if (list.size() == 0) {
 				throw new BusinessComponetException("No Loan Application records found for the date");
+			} else {
+				return list;
+			}
+		} catch (DataAccessException ex) {
+			throw new BusinessComponetException(ex.getMessage(), ex);
+		} catch (BusinessComponetException ex) {
+			throw ex;
+		} catch (Exception e) {
+			throw new BusinessComponetException(e.getMessage(), e);
+		}
+	}
+
+	@Override
+	public Boolean modifyStatus(String id, String status) throws BusinessComponetException {
+		try {
+			Boolean flag = lapdao.updateStatus(id, status);
+			if (flag == null) {
+				throw new BusinessComponetException("Loan Application details could not be modified");
+			} else {
+				return flag;
+			}
+		} catch (DataAccessException ex) {
+			throw new BusinessComponetException(ex.getMessage(), ex);
+		} catch (BusinessComponetException ex) {
+			throw ex;
+		} catch (Exception e) {
+			throw new BusinessComponetException(e.getMessage(), e);
+		}
+	}
+
+	@Override
+	public List<LoanApplication> getPendingApplications() throws BusinessComponetException {
+		try {
+			List<LoanApplication> list = lapdao.fetchAllPending();
+			if (list == null) {
+				throw new BusinessComponetException("Something went wrong...Try later");
+			} else if (list.size() == 0) {
+				throw new BusinessComponetException("No Loan Application records found");
 			} else {
 				return list;
 			}

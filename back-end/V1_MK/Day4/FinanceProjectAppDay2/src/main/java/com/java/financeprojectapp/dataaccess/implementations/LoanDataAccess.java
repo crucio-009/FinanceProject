@@ -29,9 +29,9 @@ public class LoanDataAccess implements LoanDataAccessContract {
 			connection = DataAccessUtility.createConnection();
 			query = "select loan_id, loan_type, interest_rate, description from loans";
 			prepstatement = DataAccessUtility.prepareStatement(connection, query);
-			
+
 			resultSet = prepstatement.executeQuery();
-			loans = new ArrayList<Loan>();			
+			loans = new ArrayList<Loan>();
 			while (resultSet.next()) {
 				Loan loan = new Loan();
 				loan.setLoanId(resultSet.getInt("loan_id"));
@@ -77,7 +77,7 @@ public class LoanDataAccess implements LoanDataAccessContract {
 				prepstatement.setInt(1, id);
 
 				resultSet = prepstatement.executeQuery();
-				while (resultSet.next()) {				
+				while (resultSet.next()) {
 					loan = new Loan();
 					loan.setLoanId(resultSet.getInt("loan_id"));
 					loan.setLoanType(resultSet.getString("loan_type"));
@@ -119,12 +119,12 @@ public class LoanDataAccess implements LoanDataAccessContract {
 			connection = DataAccessUtility.createConnection();
 			query = "insert into Loans (loan_id, loan_type, interest_rate, description) values(?,?,?,?)";
 			prepstatement = DataAccessUtility.prepareStatement(connection, query);
-			
+
 			prepstatement.setInt(1, l.getLoanId());
 			prepstatement.setString(2, l.getLoanType());
 			prepstatement.setFloat(3, l.getInterest_rate());
 			prepstatement.setString(4, l.getDescription());
-			
+
 			result = prepstatement.executeUpdate();
 		} catch (SQLException e) {
 			DataAccessException dataEx = new DataAccessException(e.getMessage(), e);
@@ -144,16 +144,16 @@ public class LoanDataAccess implements LoanDataAccessContract {
 				throw dataEx;
 			}
 		}
-		if(result > 0) {
+		if (result > 0) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
 
 	@Override
 	public Boolean delete(Integer id) throws DataAccessException {
-		if(id >0) {
+		if (id > 0) {
 			Connection connection = null;
 			PreparedStatement prepstatement = null;
 			String query = null;
@@ -163,7 +163,7 @@ public class LoanDataAccess implements LoanDataAccessContract {
 				connection = DataAccessUtility.createConnection();
 				query = "delete from loans where loan_id=?";
 				prepstatement = DataAccessUtility.prepareStatement(connection, query);
-				
+
 				prepstatement.setInt(1, id);
 				result = prepstatement.executeUpdate();
 
@@ -184,9 +184,9 @@ public class LoanDataAccess implements LoanDataAccessContract {
 					throw dataEx;
 				}
 			}
-			if(result > 0) {
+			if (result > 0) {
 				return true;
-			}else {
+			} else {
 				return false;
 			}
 		} else {
@@ -196,7 +196,7 @@ public class LoanDataAccess implements LoanDataAccessContract {
 
 	@Override
 	public Boolean update(Integer id, Loan l) throws DataAccessException {
-		if(id > 0) {
+		if (id > 0) {
 			Connection connection = null;
 			PreparedStatement prepstatement = null;
 			String query = null;
@@ -206,13 +206,13 @@ public class LoanDataAccess implements LoanDataAccessContract {
 				connection = DataAccessUtility.createConnection();
 				query = "update loans set loan_id=?, loan_type=?, interest_rate=?, description=? where loan_id=?";
 				prepstatement = DataAccessUtility.prepareStatement(connection, query);
-				
+
 				prepstatement.setInt(1, l.getLoanId());
 				prepstatement.setString(2, l.getLoanType());
 				prepstatement.setFloat(3, l.getInterest_rate());
 				prepstatement.setString(4, l.getDescription());
 				prepstatement.setInt(5, id);
-				
+
 				result = prepstatement.executeUpdate();
 
 			} catch (SQLException e) {
@@ -232,9 +232,9 @@ public class LoanDataAccess implements LoanDataAccessContract {
 					throw dataEx;
 				}
 			}
-			if(result > 0) {
+			if (result > 0) {
 				return true;
-			}else {
+			} else {
 				return false;
 			}
 		} else {

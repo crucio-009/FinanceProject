@@ -11,7 +11,7 @@ import jakarta.ws.rs.NameBinding;
 
 @NameBinding
 @Retention(RUNTIME)
-@Target({TYPE, METHOD})
+@Target({ TYPE, METHOD })
 public @interface Secured {
-    Role[] value() default {};
+	Role[] value() default {};
 }

@@ -6,7 +6,7 @@ public class Loan {
 	private String loanType;
 	private float interest_rate;
 	private String description;
-	
+
 	public Loan() {
 	}
 
@@ -67,5 +67,5 @@ public class Loan {
 
 		return true;
 	}
-	
+
 }

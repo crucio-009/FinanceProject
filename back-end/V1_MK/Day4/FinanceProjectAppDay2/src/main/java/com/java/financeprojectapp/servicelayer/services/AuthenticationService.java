@@ -4,9 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import com.java.financeprojectapp.dataaccess.utility.DataAccessUtility;
 import com.java.financeprojectapp.exceptions.DataAccessException;
-import com.java.financeprojectapp.servicelayer.entities.*;
+import com.java.financeprojectapp.servicelayer.entities.TokenManager;
 
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.FormParam;
@@ -18,14 +19,14 @@ import jakarta.ws.rs.core.Response;
 
 @Path("/authenticate")
 public class AuthenticationService {
-	
+
 	@POST
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public Response authenticateUser(@FormParam("username") String username, 
-            @FormParam("password") String password, @FormParam("roleid") int roleid) {
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public Response authenticateUser(@FormParam("username") String username, @FormParam("password") String password,
+			@FormParam("roleid") int roleid) {
 		try {
-		
+
 			// Authenticate the user using the credentials provided
 			authenticate(username, password, roleid);
 //			System.out.println("Accessing after authentication");
@@ -35,17 +36,17 @@ public class AuthenticationService {
 			String token = tokenmanager.issueToken(username);
 //			System.out.println("Accessing after issueToken");
 			// Return the token on the response
-			 // Return the token on the response
+			// Return the token on the response
 
-            System.out.println("Access after getting token");
-            return Response.ok(token).build();
+			System.out.println("Access after getting token");
+			return Response.ok(token).build();
 		} catch (Exception e) {
 //			System.out.println("Accessing in Catch Block");
 			e.printStackTrace();
 			return Response.status(Response.Status.FORBIDDEN).build();
-        }  
+		}
 	}
-	
+
 	private void authenticate(String username, String password, int role_id) throws DataAccessException {
 		Connection connection = null;
 		PreparedStatement prepstatement = null;
@@ -62,17 +63,18 @@ public class AuthenticationService {
 			resultSet = prepstatement.executeQuery();
 			if (resultSet.next()) {
 				String retrievedUsername = resultSet.getString("user_id");
-                String retrievedPassword = resultSet.getString("password");
-                int retrievedRole = resultSet.getInt("role_id");
-                
-                if (username.equals(retrievedUsername) && password.equals(retrievedPassword) && retrievedRole == role_id) {
-                     System.out.println("Authentication successful.");
-                } else {
-                    throw new Exception("Invalid credentials.");
-                } 
+				String retrievedPassword = resultSet.getString("password");
+				int retrievedRole = resultSet.getInt("role_id");
+
+				if (username.equals(retrievedUsername) && password.equals(retrievedPassword)
+						&& retrievedRole == role_id) {
+					System.out.println("Authentication successful.");
+				} else {
+					throw new Exception("Invalid credentials.");
+				}
 			} else {
-                throw new Exception("Invalid credentials.");
-            }
+				throw new Exception("Invalid credentials.");
+			}
 		} catch (SQLException e) {
 			DataAccessException dataEx = new DataAccessException(e.getMessage(), e);
 			throw dataEx;

@@ -4,8 +4,8 @@ import java.sql.Date;
 
 public class LoanApplication {
 
-	private int applicationId;
-	private int customerId;
+	private String applicationId;
+	private String customerId;
 	private int loanId;
 	private float loanAmount;
 	private float interestRate;
@@ -15,13 +15,14 @@ public class LoanApplication {
 	private String remarks;
 	private String documentOne;
 	private String documentTwo;
-	
+
 	public LoanApplication() {
 		super();
 	}
 
-	public LoanApplication(int applicationId, int customerId, int loanId, float loanAmount, float interestRate,
-			int tenure, Date applicationDate, String applicationStatus, String remarks, String documentOne, String documentTwo) {
+	public LoanApplication(String applicationId, String customerId, int loanId, float loanAmount, float interestRate,
+			int tenure, Date applicationDate, String applicationStatus, String remarks, String documentOne,
+			String documentTwo) {
 		super();
 		this.applicationId = applicationId;
 		this.customerId = customerId;
@@ -36,8 +37,9 @@ public class LoanApplication {
 		this.documentTwo = documentTwo;
 	}
 
-	public LoanApplication(int applicationId, int customerId, int loanId, float loanAmount, float interestRate,
-			int tenure, String applicationDate, String applicationStatus, String remarks, String documentOne, String documentTwo) {
+	public LoanApplication(String applicationId, String customerId, int loanId, float loanAmount, float interestRate,
+			int tenure, String applicationDate, String applicationStatus, String remarks, String documentOne,
+			String documentTwo) {
 		super();
 		this.applicationId = applicationId;
 		this.customerId = customerId;
@@ -52,19 +54,19 @@ public class LoanApplication {
 		this.documentTwo = documentTwo;
 	}
 
-	public int getApplicationId() {
+	public String getApplicationId() {
 		return applicationId;
 	}
 
-	public void setApplicationId(int applicationId) {
+	public void setApplicationId(String applicationId) {
 		this.applicationId = applicationId;
 	}
 
-	public int getCustomerId() {
+	public String getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(int customerId) {
+	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
 
@@ -161,5 +163,5 @@ public class LoanApplication {
 	public void setApplicationDate(Date date) {
 		this.applicationDate = date;
 	}
-	
+
 }

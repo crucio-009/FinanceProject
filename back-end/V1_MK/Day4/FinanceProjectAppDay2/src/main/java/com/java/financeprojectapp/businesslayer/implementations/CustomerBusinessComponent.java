@@ -11,8 +11,7 @@ import com.java.financeprojectapp.exceptions.DataAccessException;
 public class CustomerBusinessComponent implements CustomerBusinessComponentContract {
 
 	private CustomerDataAccess cdao = new CustomerDataAccess();
-	
-	
+
 	public CustomerBusinessComponent() {
 		super();
 	}
@@ -43,7 +42,7 @@ public class CustomerBusinessComponent implements CustomerBusinessComponentContr
 	}
 
 	@Override
-	public Customer getById(Integer id) throws BusinessComponetException {
+	public Customer getById(String id) throws BusinessComponetException {
 		try {
 			Customer c = cdao.fetchById(id);
 			if (c == null)
@@ -63,7 +62,7 @@ public class CustomerBusinessComponent implements CustomerBusinessComponentContr
 	public Boolean add(Customer c) throws BusinessComponetException {
 		try {
 			Boolean flag = cdao.insert(c);
-			if(flag == null) {
+			if (flag == null) {
 				throw new BusinessComponetException("Customer details could not be added.");
 			} else {
 				return flag;
@@ -78,10 +77,10 @@ public class CustomerBusinessComponent implements CustomerBusinessComponentContr
 	}
 
 	@Override
-	public Boolean remove(Integer id) throws BusinessComponetException {
+	public Boolean remove(String id) throws BusinessComponetException {
 		try {
 			Boolean flag = cdao.delete(id);
-			if(flag == null) {
+			if (flag == null) {
 				throw new BusinessComponetException("Customer details could not be deleted");
 			} else {
 				return flag;
@@ -96,10 +95,10 @@ public class CustomerBusinessComponent implements CustomerBusinessComponentContr
 	}
 
 	@Override
-	public Boolean modify(Integer id, Customer c) throws BusinessComponetException {
+	public Boolean modify(String id, Customer c) throws BusinessComponetException {
 		try {
 			Boolean flag = cdao.update(id, c);
-			if(flag == null) {
+			if (flag == null) {
 				throw new BusinessComponetException("Customer could not be modified");
 			} else {
 				return flag;

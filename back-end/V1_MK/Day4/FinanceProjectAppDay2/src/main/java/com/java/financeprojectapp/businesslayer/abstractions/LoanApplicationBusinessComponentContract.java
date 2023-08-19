@@ -6,7 +6,11 @@ import com.java.financeprojectapp.businesslayer.contracts.BusinessComponentContr
 import com.java.financeprojectapp.entities.LoanApplication;
 import com.java.financeprojectapp.exceptions.BusinessComponetException;
 
-public interface LoanApplicationBusinessComponentContract extends BusinessComponentContract<LoanApplication, Integer> {
+public interface LoanApplicationBusinessComponentContract extends BusinessComponentContract<LoanApplication, String> {
 
 	List<LoanApplication> getLoanApplicationsByDate(String date) throws BusinessComponetException;
+
+	List<LoanApplication> getPendingApplications() throws BusinessComponetException;
+
+	Boolean modifyStatus(String id, String status) throws BusinessComponetException;
 }

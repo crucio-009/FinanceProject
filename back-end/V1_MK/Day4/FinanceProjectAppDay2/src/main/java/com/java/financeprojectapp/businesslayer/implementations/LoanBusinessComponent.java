@@ -9,7 +9,7 @@ import com.java.financeprojectapp.exceptions.BusinessComponetException;
 import com.java.financeprojectapp.exceptions.DataAccessException;
 
 public class LoanBusinessComponent implements LoanBusinessComponentContract {
-	
+
 	private LoanDataAccess ldao = new LoanDataAccess();
 
 	public LoanBusinessComponent() {
@@ -62,7 +62,7 @@ public class LoanBusinessComponent implements LoanBusinessComponentContract {
 	public Boolean add(Loan data) throws BusinessComponetException {
 		try {
 			Boolean flag = ldao.insert(data);
-			if(flag == null) {
+			if (flag == null) {
 				throw new BusinessComponetException("Loan details could not be added.");
 			} else {
 				return flag;
@@ -80,7 +80,7 @@ public class LoanBusinessComponent implements LoanBusinessComponentContract {
 	public Boolean remove(Integer id) throws BusinessComponetException {
 		try {
 			Boolean flag = ldao.delete(id);
-			if(flag == null) {
+			if (flag == null) {
 				throw new BusinessComponetException("Loan details could not be deleted");
 			} else {
 				return flag;
@@ -98,7 +98,7 @@ public class LoanBusinessComponent implements LoanBusinessComponentContract {
 	public Boolean modify(Integer id, Loan data) throws BusinessComponetException {
 		try {
 			Boolean flag = ldao.update(id, data);
-			if(flag == null) {
+			if (flag == null) {
 				throw new BusinessComponetException("Customer could not be modified");
 			} else {
 				return flag;
@@ -115,7 +115,7 @@ public class LoanBusinessComponent implements LoanBusinessComponentContract {
 	public float getInterestRate(int id) throws BusinessComponetException {
 		try {
 			Float rate = ldao.fetchrate(id);
-			if(rate == null) {
+			if (rate == null) {
 				throw new BusinessComponetException("Customer could not be modified");
 			} else {
 				return rate;

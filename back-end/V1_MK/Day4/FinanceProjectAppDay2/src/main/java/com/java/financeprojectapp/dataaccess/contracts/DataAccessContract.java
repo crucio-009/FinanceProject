@@ -5,7 +5,7 @@ import java.util.List;
 import com.java.financeprojectapp.exceptions.DataAccessException;
 
 public interface DataAccessContract<T, TId> {
-	
+
 	List<T> fetchAll() throws DataAccessException;
 
 	T fetchById(TId id) throws DataAccessException;

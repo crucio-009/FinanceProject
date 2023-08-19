@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,12 +29,12 @@ public class CustomerDataAccess implements CustomerDataAccessContract {
 			connection = DataAccessUtility.createConnection();
 			query = "select customer_id,customer_name,gender,phone_no,email_id from customers";
 			prepstatement = DataAccessUtility.prepareStatement(connection, query);
-			
+
 			resultSet = prepstatement.executeQuery();
-			customers = new ArrayList<Customer>();			
+			customers = new ArrayList<Customer>();
 			while (resultSet.next()) {
 				Customer customer = new Customer();
-				customer.setCustomerId(resultSet.getInt("customer_id"));
+				customer.setCustomerId(resultSet.getString("customer_id"));
 				customer.setCustomerName(resultSet.getString("customer_name"));
 				customer.setGender(resultSet.getString("gender"));
 				customer.setPhoneNo(resultSet.getString("phone_no"));
@@ -62,8 +63,8 @@ public class CustomerDataAccess implements CustomerDataAccessContract {
 	}
 
 	@Override
-	public Customer fetchById(Integer id) throws DataAccessException {
-		if (id > 0) {
+	public Customer fetchById(String id) throws DataAccessException {
+		if (id != null) {
 			Connection connection = null;
 			PreparedStatement prepstatement = null;
 			String query = null;
@@ -74,12 +75,12 @@ public class CustomerDataAccess implements CustomerDataAccessContract {
 				connection = DataAccessUtility.createConnection();
 				query = "select customer_id,customer_name,gender,phone_no,email_id from customers where customer_id=?";
 				prepstatement = DataAccessUtility.prepareStatement(connection, query);
-				prepstatement.setInt(1, id);
+				prepstatement.setString(1, id);
 
 				resultSet = prepstatement.executeQuery();
-				while (resultSet.next()) {				
+				while (resultSet.next()) {
 					customer = new Customer();
-					customer.setCustomerId(resultSet.getInt("customer_id"));
+					customer.setCustomerId(resultSet.getString("customer_id"));
 					customer.setCustomerName(resultSet.getString("customer_name"));
 					customer.setGender(resultSet.getString("gender"));
 					customer.setPhoneNo(resultSet.getString("phone_no"));
@@ -105,7 +106,7 @@ public class CustomerDataAccess implements CustomerDataAccessContract {
 			}
 			return customer;
 		} else {
-			throw new DataAccessException("negative value not allowed");
+			throw new DataAccessException("null value not allowed");
 		}
 	}
 
@@ -115,18 +116,21 @@ public class CustomerDataAccess implements CustomerDataAccessContract {
 		PreparedStatement prepstatement = null;
 		String query = null;
 		Integer result = null;
+		String CustomerId = "CUST" + UUID.randomUUID().toString().substring(0, 8);
+		System.out.println(CustomerId);
+
 		try {
 			DataAccessUtility.regsiterDriver();
 			connection = DataAccessUtility.createConnection();
 			query = "insert into Customers(customer_id,customer_name,gender,phone_no,email_id) values(?,?,?,?,?)";
 			prepstatement = DataAccessUtility.prepareStatement(connection, query);
-			
-			prepstatement.setInt(1, c.getCustomerId());
+
+			prepstatement.setString(1, CustomerId);
 			prepstatement.setString(2, c.getCustomerName());
 			prepstatement.setString(3, c.getGender());
 			prepstatement.setString(4, c.getPhoneNo());
 			prepstatement.setString(5, c.getEmailId());
-			
+
 			result = prepstatement.executeUpdate();
 		} catch (SQLException e) {
 			DataAccessException dataEx = new DataAccessException(e.getMessage(), e);
@@ -146,16 +150,16 @@ public class CustomerDataAccess implements CustomerDataAccessContract {
 				throw dataEx;
 			}
 		}
-		if(result > 0) {
+		if (result > 0) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
 
 	@Override
-	public Boolean delete(Integer id) throws DataAccessException {
-		if(id >0) {
+	public Boolean delete(String id) throws DataAccessException {
+		if (id != null) {
 			Connection connection = null;
 			PreparedStatement prepstatement = null;
 			String query = null;
@@ -165,8 +169,8 @@ public class CustomerDataAccess implements CustomerDataAccessContract {
 				connection = DataAccessUtility.createConnection();
 				query = "delete from customers where customer_id=?";
 				prepstatement = DataAccessUtility.prepareStatement(connection, query);
-				
-				prepstatement.setInt(1, id);
+
+				prepstatement.setString(1, id);
 				result = prepstatement.executeUpdate();
 
 			} catch (SQLException e) {
@@ -186,20 +190,20 @@ public class CustomerDataAccess implements CustomerDataAccessContract {
 					throw dataEx;
 				}
 			}
-			if(result > 0) {
+			if (result > 0) {
 				return true;
-			}else {
+			} else {
 				return false;
 			}
 		} else {
-			throw new DataAccessException("negative value not allowed");
+			throw new DataAccessException("null value not allowed");
 		}
-		
+
 	}
 
 	@Override
-	public Boolean update(Integer id, Customer c) throws DataAccessException {
-		if(id > 0) {
+	public Boolean update(String id, Customer c) throws DataAccessException {
+		if (id != null) {
 			Connection connection = null;
 			PreparedStatement prepstatement = null;
 			String query = null;
@@ -209,14 +213,15 @@ public class CustomerDataAccess implements CustomerDataAccessContract {
 				connection = DataAccessUtility.createConnection();
 				query = "update customers set customer_id=?, customer_name=?, gender=?, phone_no=?, email_id=? where customer_id=?";
 				prepstatement = DataAccessUtility.prepareStatement(connection, query);
-				
-				prepstatement.setInt(1, c.getCustomerId());
+
+				// TODO Change the following line to not update the customer id.
+				prepstatement.setString(1, c.getCustomerId());
 				prepstatement.setString(2, c.getCustomerName());
 				prepstatement.setString(3, c.getGender());
 				prepstatement.setString(4, c.getPhoneNo());
 				prepstatement.setString(5, c.getEmailId());
-				prepstatement.setInt(6, id);
-				
+				prepstatement.setString(6, id);
+
 				result = prepstatement.executeUpdate();
 
 			} catch (SQLException e) {
@@ -236,22 +241,22 @@ public class CustomerDataAccess implements CustomerDataAccessContract {
 					throw dataEx;
 				}
 			}
-			if(result > 0) {
+			if (result > 0) {
 				return true;
-			}else {
+			} else {
 				return false;
 			}
 		} else {
-			throw new DataAccessException("negative value not allowed");
+			throw new DataAccessException("null value not allowed");
 		}
 	}
 
 	public Customer fetchByEmail(String email) throws DataAccessException {
 		String regex = "^(.+)@(.+)$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(email);
-        if(matcher.matches()) {
-        	Connection connection = null;
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(email);
+		if (matcher.matches()) {
+			Connection connection = null;
 			PreparedStatement prepstatement = null;
 			String query = null;
 			ResultSet resultSet = null;
@@ -264,9 +269,9 @@ public class CustomerDataAccess implements CustomerDataAccessContract {
 				prepstatement.setString(1, email);
 
 				resultSet = prepstatement.executeQuery();
-				while (resultSet.next()) {				
+				while (resultSet.next()) {
 					customer = new Customer();
-					customer.setCustomerId(resultSet.getInt("customer_id"));
+					customer.setCustomerId(resultSet.getString("customer_id"));
 					customer.setCustomerName(resultSet.getString("customer_name"));
 					customer.setGender(resultSet.getString("gender"));
 					customer.setPhoneNo(resultSet.getString("phone_no"));
@@ -291,9 +296,9 @@ public class CustomerDataAccess implements CustomerDataAccessContract {
 				}
 			}
 			return customer;
-        } else {
-        	throw new DataAccessException("Illegal Email Address");
-        }
+		} else {
+			throw new DataAccessException("Illegal Email Address");
+		}
 	}
 
 }

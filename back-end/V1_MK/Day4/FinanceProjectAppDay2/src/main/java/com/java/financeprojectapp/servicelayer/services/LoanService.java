@@ -18,7 +18,7 @@ import jakarta.ws.rs.core.MediaType;
 public class LoanService {
 
 	public LoanBusinessComponent lbo = new LoanBusinessComponent();
-	
+
 	@GET
 	@Path("/all")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -30,7 +30,7 @@ public class LoanService {
 			return new ServiceResponse<List<Loan>>(e.getMessage(), 200, null);
 		}
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -42,11 +42,11 @@ public class LoanService {
 			return new ServiceResponse<Loan>(e.getMessage(), 500, null);
 		}
 	}
-	
+
 	@GET
 	@Path("/get/rate/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ServiceResponse<Float> retrieveInterestRate (@PathParam("id") int id) throws Exception {
+	public ServiceResponse<Float> retrieveInterestRate(@PathParam("id") int id) throws Exception {
 		try {
 			Float rate = lbo.getInterestRate(id);
 			return new ServiceResponse<Float>("record found", 200, rate);
@@ -54,7 +54,7 @@ public class LoanService {
 			return new ServiceResponse<Float>(e.getMessage(), 500, null);
 		}
 	}
-	
+
 	@POST
 	@Path("/add")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -67,7 +67,7 @@ public class LoanService {
 			return new ServiceResponse<Boolean>(e.getMessage(), 500, null);
 		}
 	}
-	
+
 	@POST
 	@Path("/delete/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -79,7 +79,7 @@ public class LoanService {
 			return new ServiceResponse<Boolean>(e.getMessage(), 500, null);
 		}
 	}
-	
+
 	@POST
 	@Path("/update/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)

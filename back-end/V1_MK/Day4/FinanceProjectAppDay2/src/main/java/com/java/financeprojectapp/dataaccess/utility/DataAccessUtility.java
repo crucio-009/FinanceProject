@@ -11,15 +11,15 @@ public class DataAccessUtility {
 	}
 
 	public static Connection createConnection() throws SQLException {
-		return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","System","Oracle2023");
+		return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "System", "Oracle2023");
 	}
-	
+
 	public static PreparedStatement prepareStatement(Connection connection, String query) throws SQLException {
 		return connection.prepareStatement(query);
 	}
 
-	public static void closeConnection(Connection connection) throws SQLException{
-		if(connection!=null)
+	public static void closeConnection(Connection connection) throws SQLException {
+		if (connection != null)
 			connection.close();
 	}
 }
