@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> view Loan Applications page</title>
+    <!-- <link rel="stylesheet" href="">  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg bg-dark " data-bs-theme="dark">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#" >GFC</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto">
+                  <li class="nav-item">
+                    <a class="nav-link " href="./addcustomer.html">Add New Customer</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./addloanapplication.html">New Loan Application</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./customerdetails.html">View Customers</a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="#">View Loan Applications</a>
+                  </li>
+                  <!-- <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Separated link</a>
+                    </div>
+                  </li> -->
+                </ul>
+                
+              </div>
+            </div>
+          </nav>
+    </div>
+    
+    
+    
+
+    <div class="container margin-style text-nowrap">
+      <br>
+        <legend class="text-bold text-center"> Loan Applications Info:</legend>
+   
+        <table class="table table-striped text-center">
+            <thead>
+                <tr>
+                    <th>Application ID</th>
+                    <th>Customer ID</th>
+                    <th>Loan ID</th>
+                    <th>Loan Amount</th>
+                    <th>Interest Rate</th>
+                    <th>Tenure</th>
+                    <th>Application Date</th>
+                    <th>Status</th>
+                    <th>Remarks</th>
+
+                    <th>Document1</th>
+                    <!-- <th>Document2</th> -->
+                    
+                    
+                </tr>
+            </thead>
+            <tbody id="tblBody">
+                
+                <!-- <tr>
+                    <td></td>
+                    <td></td>
+                    <td><img src="" alt=""></td>
+                </tr> -->
+            </tbody>
+        </table>
+    
+        
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+   <script src="../scripts/loanapplicationdetails.js"></script> 
+</body>
+
+</html>
