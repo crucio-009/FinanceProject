@@ -170,4 +170,43 @@ public class LoanApplicationBusinessComponent implements LoanApplicationBusiness
 		}
 	}
 
+	@Override
+	public List<LoanApplication> getLoanApplicationsByType(String type) throws BusinessComponetException {
+		try {
+			List<LoanApplication> list = lapdao.fetchByType(type);
+			if (list == null) {
+				throw new BusinessComponetException("Something went wrong...Try later");
+			} else if (list.size() == 0) {
+				System.out.println(list);
+				throw new BusinessComponetException("No Loan Application records found for that type");
+			} else {
+				return list;
+			}
+		} catch (DataAccessException ex) {
+			throw new BusinessComponetException(ex.getMessage(), ex);
+		} catch (BusinessComponetException ex) {
+			throw ex;
+		} catch (Exception e) {
+			throw new BusinessComponetException(e.getMessage(), e);
+		}
+	}
+
+	@Override
+	public Boolean modifyAmount(String id, Float amount) throws BusinessComponetException {
+		try {
+			Boolean flag = lapdao.updateAmount(id, amount);
+			if (flag == null) {
+				throw new BusinessComponetException("Loan Application details could not be modified");
+			} else {
+				return flag;
+			}
+		} catch (DataAccessException ex) {
+			throw new BusinessComponetException(ex.getMessage(), ex);
+		} catch (BusinessComponetException ex) {
+			throw ex;
+		} catch (Exception e) {
+			throw new BusinessComponetException(e.getMessage(), e);
+		}
+	}
+
 }

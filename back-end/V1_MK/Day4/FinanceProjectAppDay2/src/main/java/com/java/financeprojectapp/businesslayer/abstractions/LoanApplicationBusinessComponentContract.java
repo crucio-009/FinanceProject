@@ -10,7 +10,11 @@ public interface LoanApplicationBusinessComponentContract extends BusinessCompon
 
 	List<LoanApplication> getLoanApplicationsByDate(String date) throws BusinessComponetException;
 
+	List<LoanApplication> getLoanApplicationsByType(String type) throws BusinessComponetException;
+
 	List<LoanApplication> getPendingApplications() throws BusinessComponetException;
 
 	Boolean modifyStatus(String id, String status) throws BusinessComponetException;
+	
+	Boolean modifyAmount(String id, Float amount) throws BusinessComponetException;
 }

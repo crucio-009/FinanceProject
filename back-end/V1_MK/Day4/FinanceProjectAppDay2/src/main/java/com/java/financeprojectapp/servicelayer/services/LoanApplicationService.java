@@ -69,6 +69,19 @@ public class LoanApplicationService {
 	}
 
 	@GET
+	@Path("/get/type")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ServiceResponse<List<LoanApplication>> retrieveLoanApplicationByType(@QueryParam("type") String type)
+			throws Exception {
+		try {
+			List<LoanApplication> list = labo.getLoanApplicationsByType(type);
+			return new ServiceResponse<List<LoanApplication>>("records found", 200, list);
+		} catch (Exception e) {
+			return new ServiceResponse<List<LoanApplication>>(e.getMessage(), 200, null);
+		}
+	}
+
+	@GET
 	@Path("/get/pending")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ServiceResponse<List<LoanApplication>> retrievePendingApplications() throws Exception {
@@ -123,8 +136,19 @@ public class LoanApplicationService {
 	public ServiceResponse<Boolean> modifyApplicationStatus(@PathParam("id") String id,
 			@QueryParam("status") String status) throws Exception {
 		try {
-//			System.out.println(status);
 			Boolean flag = labo.modifyStatus(id, status);
+			return new ServiceResponse<Boolean>("record updated", 200, flag);
+		} catch (Exception e) {
+			return new ServiceResponse<Boolean>(e.getMessage(), 500, null);
+		}
+	}
+	
+	@POST
+	@Path("topup/{id}")
+	public ServiceResponse<Boolean> applyTopUpLoan(@PathParam("id") String id,
+			@QueryParam("amount") Float topup) throws Exception {
+		try {
+			Boolean flag = labo.modifyAmount(id, topup);
 			return new ServiceResponse<Boolean>("record updated", 200, flag);
 		} catch (Exception e) {
 			return new ServiceResponse<Boolean>(e.getMessage(), 500, null);

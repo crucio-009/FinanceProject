@@ -157,7 +157,7 @@ public class LoanApplicationDataAccess implements LoanApplicationDataAccessContr
 		String query = null;
 		Integer result = null;
 		String LoanApplicationId = "LOAN" + UUID.randomUUID().toString().substring(0, 11);
-		System.out.println(LoanApplicationId);
+		Date date = new Date(System.currentTimeMillis());
 
 		try {
 			DataAccessUtility.regsiterDriver();
@@ -175,8 +175,8 @@ public class LoanApplicationDataAccess implements LoanApplicationDataAccessContr
 			prepstatement.setInt(3, la.getLoanId());
 			prepstatement.setFloat(4, la.getLoanAmount());
 			prepstatement.setInt(5, la.getTenure());
-			prepstatement.setDate(6, la.getApplicationDate());
-			prepstatement.setString(7, la.getApplicationStatus());
+			prepstatement.setDate(6, date);
+			prepstatement.setString(7, la.getApplicationStatus().toUpperCase());
 			prepstatement.setString(8, la.getRemarks());
 			prepstatement.setFloat(9, la.getInterestRate());
 			prepstatement.setBlob(10, blobone);
@@ -276,7 +276,7 @@ public class LoanApplicationDataAccess implements LoanApplicationDataAccessContr
 				prepstatement.setFloat(4, la.getLoanAmount());
 				prepstatement.setInt(5, la.getTenure());
 				prepstatement.setDate(6, la.getApplicationDate());
-				prepstatement.setString(7, la.getApplicationStatus());
+				prepstatement.setString(7, la.getApplicationStatus().toUpperCase());
 				prepstatement.setString(8, la.getRemarks());
 				prepstatement.setFloat(9, la.getInterestRate());
 				prepstatement.setBlob(10, blobone);
@@ -312,6 +312,7 @@ public class LoanApplicationDataAccess implements LoanApplicationDataAccessContr
 		}
 	}
 
+	@Override
 	public List<LoanApplication> fetchByDate(String date) throws DataAccessException {
 		if (Date.valueOf(date) != null) {
 			Connection connection = null;
@@ -322,7 +323,7 @@ public class LoanApplicationDataAccess implements LoanApplicationDataAccessContr
 			try {
 				DataAccessUtility.regsiterDriver();
 				connection = DataAccessUtility.createConnection();
-				query = "select application_id, customer_id, loan_id, loan_amount, tenure, application_date, application_status, remarks, interest_rate, document_one, document_two from loan_applications where application_date=?";
+				query = "select * from loan_applications where application_date=?";
 				prepstatement = DataAccessUtility.prepareStatement(connection, query);
 				prepstatement.setDate(1, Date.valueOf(date));
 
@@ -393,7 +394,7 @@ public class LoanApplicationDataAccess implements LoanApplicationDataAccessContr
 				query = "update loan_applications set application_status=? where application_id=?";
 				prepstatement = DataAccessUtility.prepareStatement(connection, query);
 
-				prepstatement.setString(1, status);
+				prepstatement.setString(1, status.toUpperCase());
 				prepstatement.setString(2, id);
 
 				result = prepstatement.executeUpdate();
@@ -487,6 +488,117 @@ public class LoanApplicationDataAccess implements LoanApplicationDataAccessContr
 			}
 		}
 		return applications;
+	}
+
+	@Override
+	public List<LoanApplication> fetchByType(String approvalStatus) throws DataAccessException {
+		Connection connection = null;
+		PreparedStatement prepstatement = null;
+		ResultSet resultSet = null;
+		String query = null;
+		String status = approvalStatus.toUpperCase();
+		List<LoanApplication> applications = null;
+		try {
+			DataAccessUtility.regsiterDriver();
+			connection = DataAccessUtility.createConnection();
+			query = "select * from loan_applications where application_status=?";
+			prepstatement = DataAccessUtility.prepareStatement(connection, query);
+			prepstatement.setString(1, status);
+
+			resultSet = prepstatement.executeQuery();
+			applications = new ArrayList<LoanApplication>();
+			while (resultSet.next()) {
+				LoanApplication application = new LoanApplication();
+				StringBuffer bufone = new StringBuffer();
+				StringBuffer buftwo = new StringBuffer();
+				String temp = null;
+				BufferedReader readerone = new BufferedReader(
+						new InputStreamReader(resultSet.getBlob("document_one").getBinaryStream()));
+				BufferedReader readertwo = new BufferedReader(
+						new InputStreamReader(resultSet.getBlob("document_two").getBinaryStream()));
+				while ((temp = readerone.readLine()) != null) {
+					bufone.append(temp);
+				}
+				while ((temp = readertwo.readLine()) != null) {
+					buftwo.append(temp);
+				}
+				application.setApplicationId(resultSet.getString("application_id"));
+				application.setCustomerId(resultSet.getString("customer_id"));
+				application.setLoanId(resultSet.getInt("loan_id"));
+				application.setLoanAmount(resultSet.getFloat("loan_amount"));
+				application.setTenure(resultSet.getInt("tenure"));
+				application.setApplicationDate(resultSet.getDate("application_date"));
+				application.setApplicationStatus(resultSet.getString("application_status"));
+				application.setRemarks(resultSet.getString("remarks"));
+				application.setInterestRate(resultSet.getFloat("interest_rate"));
+				application.setDocumentOne(bufone.toString());
+				application.setDocumentTwo(buftwo.toString());
+				applications.add(application);
+			}
+		} catch (SQLException e) {
+			DataAccessException dataEx = new DataAccessException(e.getMessage(), e);
+			throw dataEx;
+		} catch (ClassNotFoundException e) {
+			DataAccessException dataEx = new DataAccessException(e.getMessage(), e);
+			throw dataEx;
+		} catch (Exception e) {
+			DataAccessException dataEx = new DataAccessException(e.getMessage(), e);
+			throw dataEx;
+		} finally {
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (SQLException e) {
+				DataAccessException dataEx = new DataAccessException(e.getMessage(), e);
+				throw dataEx;
+			}
+		}
+		return applications;
+	}
+
+	@Override
+	public Boolean updateAmount(String id, Float amount) throws DataAccessException {
+		if (amount != null) {
+			Connection connection = null;
+			PreparedStatement prepstatement = null;
+			String query = null;
+			Integer result = null;
+			try {
+				DataAccessUtility.regsiterDriver();
+				connection = DataAccessUtility.createConnection();
+				query = "update loan_applications set loan_amount=loan_amount+? where application_id=?";
+				prepstatement = DataAccessUtility.prepareStatement(connection, query);
+
+				prepstatement.setFloat(1, amount);
+				prepstatement.setString(2, id);
+
+				result = prepstatement.executeUpdate();
+
+			} catch (SQLException e) {
+				DataAccessException dataEx = new DataAccessException(e.getMessage(), e);
+				throw dataEx;
+			} catch (ClassNotFoundException e) {
+				DataAccessException dataEx = new DataAccessException(e.getMessage(), e);
+				throw dataEx;
+			} catch (Exception e) {
+				DataAccessException dataEx = new DataAccessException(e.getMessage(), e);
+				throw dataEx;
+			} finally {
+				try {
+					DataAccessUtility.closeConnection(connection);
+				} catch (SQLException e) {
+					DataAccessException dataEx = new DataAccessException(e.getMessage(), e);
+					throw dataEx;
+				}
+			}
+			if (result > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			throw new DataAccessException("null value not allowed");
+		}
 	}
 
 }
