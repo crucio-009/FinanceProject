@@ -1,0 +1,18 @@
+.navbar{
+    background-color: rgb(26, 24, 29);
+}
+.nav-link{
+    color: white;
+}
+.active{
+    font-weight: bold;
+    border-bottom: 2px solid white;
+    color: bisque;
+}
+.navbar-brand{
+    font-family: 'Amatic SC', cursive;
+    font-size:x-large;
+    color: aqua;
+}
+
+    

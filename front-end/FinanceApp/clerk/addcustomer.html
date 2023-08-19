@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles/addcustomer.css">
+    <script src="../requestConfig.js"></script>
+</head>
+<body>
+  
+  <div class="container">
+    <nav class="navbar navbar-expand-lg bg-dark " data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#" >GFC</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Add New Customer</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./addloanapplication.html">New Loan Application</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./customerdetails.html">View Customers</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./loanapplicationdetails.html">View Loan Applications</a>
+              </li>
+              <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Separated link</a>
+                </div>
+              </li> -->
+            </ul>
+            
+          </div>
+        </div>
+      </nav>
+</div>
+
+
+
+<form class="w-50 mx-auto bordered m-3">
+    <fieldset>
+      <legend >Enter Customer Details</legend>
+     
+      <div class="form-group">
+        <label for="inputId" class="form-label mt-4">Customer ID</label>
+        <input type="number" class="form-control" id="inputId" placeholder="Enter customer id" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label for="inputName" class="form-label mt-4">Customer Name</label>
+        <input type="text" class="form-control" id="inputName" placeholder="Enter here" autocomplete="off">
+      </div>
+      
+      <div class="form-group">
+        <label for="inputEmail" class="form-label mt-4">Email address</label>
+        <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="e.g. xyz@gmail.com">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="inputGender" class="form-label mt-4">Gender</label>
+        <select class="form-select" id="inputGender">
+          <option value="M">Male</option>
+          <option value="F">Female</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="inputPhone" class="form-label mt-4">Phone Number</label>
+        <div class="form-group">
+          <div class="input-group mb-3">
+            <span class="input-group-text">+91</span>
+            <input  id="inputPhone" type="text" class="form-control" placeholder="Enter your 10 digit mobile no" >
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputAddress" class="form-label mt-4">Address</label>
+        <textarea class="form-control" id="inputAddress" rows="3"></textarea>
+      </div>
+      <div class="form-group ">
+        <label for="inputPincode" class="form-label mt-4">Pincode</label>
+        <input type="number" class="form-control" id="inputPincode" placeholder="eg. 500090" autocomplete="off">
+      </div>
+       <div class="btnElement ">
+        <button type="button" class="btn btn-secondary mt-4 w-25 text-white " id="btnSubmit">Submit</button>
+       </div>
+      </fieldset> 
+  </form>
+    
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="../scripts/addcustomer.js"></script> 
+</body>
+</html>
