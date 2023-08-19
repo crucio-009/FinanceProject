@@ -23,11 +23,11 @@ public class AuthenticationService {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response authenticateUser(@FormParam("username") String username, 
-            @FormParam("password") String password) {
+            @FormParam("password") String password, @FormParam("roleid") int roleid) {
 		try {
 		
 			// Authenticate the user using the credentials provided
-			authenticate(username, password);
+			authenticate(username, password, roleid);
 //			System.out.println("Accessing after authentication");
 			// Issue a token for the user
 //			System.out.println("Before Token Manager");
@@ -46,7 +46,7 @@ public class AuthenticationService {
         }  
 	}
 	
-	private void authenticate(String username, String password) throws DataAccessException {
+	private void authenticate(String username, String password, int role_id) throws DataAccessException {
 		Connection connection = null;
 		PreparedStatement prepstatement = null;
 		String query = null;
@@ -63,8 +63,9 @@ public class AuthenticationService {
 			if (resultSet.next()) {
 				String retrievedUsername = resultSet.getString("user_id");
                 String retrievedPassword = resultSet.getString("password");
+                int retrievedRole = resultSet.getInt("role_id");
                 
-                if (username.equals(retrievedUsername) && password.equals(retrievedPassword)) {
+                if (username.equals(retrievedUsername) && password.equals(retrievedPassword) && retrievedRole == role_id) {
                      System.out.println("Authentication successful.");
                 } else {
                     throw new Exception("Invalid credentials.");
