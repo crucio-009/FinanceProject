@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="./styles/addcustomer.css">
+     <script src="../requestConfig.js"></script> 
 </head>
 <body>
     
@@ -53,18 +53,24 @@
     <fieldset>
       <legend >Enter Loan Application Details</legend>
      
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="inputAppNo" class="form-label mt-4">Application Number</label>
         <input type="number" class="form-control" id="inputAppNo" placeholder="Enter Application Number" autocomplete="off">
-      </div>
+      </div>-->
+
       <div class="form-group">
         <label for="inputId" class="form-label mt-4">Customer ID</label>
-        <input type="number" class="form-control" id="inputId" placeholder="Enter customer id" autocomplete="off">
+        <input type="text" class="form-control" id="inputId" placeholder="Enter customer id" autocomplete="off">
       </div>
+
       <div class="form-group">
-        <label for="inputLoantype" class="form-label mt-4">Select Loan Type</label>
-        <input type="number" class="form-control" id="inputLoantype" placeholder="Enter loan id" autocomplete="off">
+        <label for="inputType" class="form-label mt-4">Select Loan Type</label>
+        <select class="form-select" id="inputType">
+          <option selected disabled>--select--</option>
+         
+        </select>
       </div>
+     
       <div class="form-group">
         <label for="inputAmt" class="form-label mt-4">Enter Loan Amount required</label>
         <div class="form-group">
@@ -79,8 +85,8 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="inputTenure" class="form-label mt-4">Loan Tenure</label>
-        <input type="number" class="form-control" id="inputTenure" placeholder="Enter loan tenure in yrs " autocomplete="off">
+        <label for="inputTenure" class="form-label mt-4">Enter Loan Tenure</label>
+        <input type="number" class="form-control" id="inputTenure" placeholder="Enter loan tenure (in yrs)" autocomplete="off">
       </div>
       <div class="form-group">
         <label for="inputFile" class="form-label mt-4">Upload document Image</label>
