@@ -29,8 +29,8 @@ public class MailService {
         try {
             String host = "smtp.gmail.com";
 //            int port = 587;
-            final String username = "manishssssskumaraaaaa@gmail.com"; // Replace with your Gmail email
-            final String password = "osbzpdwcdbexonng"; // Replace with your Gmail password
+            final String username = "id"; // Replace with your Gmail email
+            final String password = "password"; // Replace with your Gmail password
 
             Properties props = new Properties();
             props.put("mail.smtp.auth", "true");
@@ -100,8 +100,8 @@ public class MailService {
         try {
             String host = "smtp.gmail.com";
 //            int port = 587;
-            final String username = "manishssssskumaraaaaa@gmail.com"; // Replace with your Gmail email
-            final String password = "osbzpdwcdbexonng"; // Replace with your Gmail password
+            final String username = "id"; // Replace with your Gmail email
+            final String password = "password"; // Replace with your Gmail password
 
             Properties props = new Properties();
             props.put("mail.smtp.auth", "true");
