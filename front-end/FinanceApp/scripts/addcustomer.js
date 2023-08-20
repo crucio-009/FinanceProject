@@ -1,14 +1,14 @@
 const btnElement=document.getElementById('btnSubmit')
 btnElement.addEventListener('click',function(){
 
-    const idElement = document.getElementById('inputId')
+    // const idElement = document.getElementById('inputId')
     const nameElement = document.getElementById('inputName')
     const emailElement = document.getElementById('inputEmail')
     const genderElement = document.getElementById('inputGender')
     const phoneElement = document.getElementById('inputPhone')
 
     const data={
-        customerId:idElement.value,
+        // customerId:idElement.value,
         customerName:nameElement.value,
         gender:genderElement.value,
         phoneNo:phoneElement.value,

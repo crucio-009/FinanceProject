@@ -3,11 +3,11 @@ function getLoanApplications(){
     const req = new XMLHttpRequest()
     req.onreadystatechange = function () {
         if (req.status === 200 && req.readyState === 4) {
-            console.log(req.responseText)
+            //console.log(req.responseText)
             const jsData = JSON.parse(req.responseText)
             const tableBody = document.getElementById('tblBody')
             tableBody.innerHTML = ""
-            console.log(jsData)
+            //console.log(jsData)
 
             for (const data of jsData.responseData) {
 
@@ -59,6 +59,8 @@ function getLoanApplications(){
         }
     }
     req.open('GET', 'http://localhost:8080/FinanceProjectAppDay2/rest/loan/applications/all')
+    const token=localStorage.getItem('token')
+    req.setRequestHeader('Authorization', `Bearer ${token}`)
     req.send() 
 }
 

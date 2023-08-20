@@ -1,9 +1,18 @@
-// document.getElementById("role").addEventListener('change', function(){
-//     localStorage.setItem('role_id', this.value);
-//     sessionStorage.setItem('role_id', this.value);
-//     document.querySelector("body > div.container-fluid.d-flex.align-items-center.py-4.hero > main > div > span > a").href=""
-// });
-
+function setCustomerID(email){
+    const userId=email;
+    //console.log(userId);
+    const req = new XMLHttpRequest();
+    req.onreadystatechange = function () {
+        if (req.status === 200 && req.readyState === 4) {
+            const resp2=JSON.parse(req.responseText);
+            //console.log(resp2)
+            localStorage.setItem('custid',resp2.responseData.customerId)
+        }
+    }
+    req.open('GET',`http://localhost:8080/FinanceProjectAppDay2/rest/customers/get?email=${userId}`,true)
+    req.setRequestHeader('Content-Type', 'application/json')
+    req.send()
+}
 document.getElementById('btnLogin').addEventListener('click',function(){
 
     const floatingEmail= document.getElementById('floatingEmail').value
@@ -25,24 +34,27 @@ document.getElementById('btnLogin').addEventListener('click',function(){
     
     //const data="username=floatingEmail&password=floatingPassword&roleid=role_id"
     const data = `username=${encodeURIComponent(floatingEmail)}&password=${encodeURIComponent(floatingPassword)}&roleid=${encodeURIComponent(role_id)}`;
-    console.log(data)
+    //console.log(data)
     const req = new XMLHttpRequest()
     req.onreadystatechange = function () {
         if (req.status === 200 && req.readyState === 4) {
             const token=req.responseText
             localStorage.setItem('token', token);
-            window.alert("Login Success")
+            localStorage.setItem('userid',floatingEmail)
             if(role_id==0){
+                setCustomerID(floatingEmail);
+                window.alert("Login Success")
                 window.open("customer/addloanapplication.html",'_self')
+                
             }
             else  if(role_id==1){
+                window.alert("Login Success")
                 window.open("clerk/addcustomer.html",'_self')
             }
             else  if(role_id==2){
-                window.open("manager/managerhome.html",'_self')
+                window.alert("Login Success")
+                window.open("manager/loanapplicationdetails.html",'_self')
             }
-            // const serviceResponseObject = JSON.parse(req.responseText)
-            // loadCustomerDetails(serviceResponseObject.responseData)
         }
         else if(req.status===403 && req.readyState===4){
             window.alert("Invalid credentials")
@@ -59,36 +71,3 @@ document.getElementById('btnLogin').addEventListener('click',function(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// document.getElementsByClassName('signup-link')[0].addEventListener('click', function(){
-//     if(localStorage.getItem('role_id') == 0){
-//         this.href="usersignup.html";
-//     }
-//     else if(localStorage.getItem('role_id') == 2){
-//         this.href="managersignup.html";
-//     }
-//     else if(localStorage.getItem('role_id') == 1){
-//         this.href="clerksignup.html";
-//     }
-//     else{
-//         this.href="login.html"
-//     }
-// });
-
-// document.getElementById("btnLogin").addEventListener('click',function(){
-    
-//     window.open('./usersignup.html','_self');
-// });
