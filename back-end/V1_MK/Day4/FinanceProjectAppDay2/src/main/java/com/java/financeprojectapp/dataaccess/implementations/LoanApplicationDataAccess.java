@@ -14,8 +14,10 @@ import java.util.UUID;
 
 import com.java.financeprojectapp.dataaccess.abstractions.LoanApplicationDataAccessContract;
 import com.java.financeprojectapp.dataaccess.utility.DataAccessUtility;
+import com.java.financeprojectapp.entities.EmailRequest;
 import com.java.financeprojectapp.entities.LoanApplication;
 import com.java.financeprojectapp.exceptions.DataAccessException;
+import com.java.financeprojectapp.servicelayer.services.MailService;
 
 public class LoanApplicationDataAccess implements LoanApplicationDataAccessContract {
 
@@ -382,8 +384,8 @@ public class LoanApplicationDataAccess implements LoanApplicationDataAccessContr
 	}
 
 	@Override
-	public Boolean updateStatus(String id, String status) throws DataAccessException {
-		if (status != null) {
+	public Boolean updateStatus(String id, String status, String customerid) throws DataAccessException {
+		if (status.equalsIgnoreCase("rejected") || status.equalsIgnoreCase("approved") || status.equalsIgnoreCase("pending")) {
 			Connection connection = null;
 			PreparedStatement prepstatement = null;
 			String query = null;
@@ -398,6 +400,49 @@ public class LoanApplicationDataAccess implements LoanApplicationDataAccessContr
 				prepstatement.setString(2, id);
 
 				result = prepstatement.executeUpdate();
+				
+				query = "select email_id from customers where customer_id=?";
+				prepstatement = DataAccessUtility.prepareStatement(connection, query);
+				prepstatement.setString(1, customerid);
+				
+				ResultSet resultSet = prepstatement.executeQuery();
+				while(resultSet.next()) {
+					//set variables for email request body
+					String footer = " Please find below your Loan Application Id.\r\n"
+							+ "\r\n"
+							+ "Application Id: " + id
+							+ "\n\r\n"
+							+ "If you encounter any issues or have any questions regarding your new loan applications, please don't hesitate to reach out to our support team at manishssssskumaraaaaa@gmail.com. We're here to assist you every step of the way.\r\n"
+							+ "\r\n"
+							+ "Thank you for choosing Ganesh Finance Limited Company for your Loan needs. We look forward to serving you and ensuring a seamless experience.\r\n"
+							+ "\r\n"
+							+ "Best regards,\r\n"
+							+ "\r\n"
+							+ "Ganesh Finance Limited Company\r\n"
+							+ "manishssssskumaraaaaa@gmail.com\r\n"
+							+ "\r\n"
+							+ "\r\n"
+							+ "\r\n"
+							+ "\r\n"
+							+ "\r\n"
+							+ "";
+					String tomail = resultSet.getString("email_id");
+					String subject = "Loan Application Approved";
+					String body = "Congratulations your Loan Application has been Approved!";
+					
+					if(status.equalsIgnoreCase("rejected")) {
+						subject = "Loan Application Rejected";
+						body = "Uh-Oh your Loan Application has been Rejected!";
+					} else if(status.equalsIgnoreCase("pending")) {
+						subject = "Loan Application Pending";
+						body = "We are processing you Loan Application";
+					}
+					
+					EmailRequest emailRequest = new EmailRequest(tomail, subject, body + footer);
+					
+					MailService mailservice = new MailService();
+					mailservice.sendEmail(emailRequest);	
+				}
 
 			} catch (SQLException e) {
 				DataAccessException dataEx = new DataAccessException(e.getMessage(), e);
@@ -422,7 +467,7 @@ public class LoanApplicationDataAccess implements LoanApplicationDataAccessContr
 				return false;
 			}
 		} else {
-			throw new DataAccessException("null value not allowed");
+			throw new DataAccessException("Illegal Status Parameter");
 		}
 	}
 
@@ -501,9 +546,15 @@ public class LoanApplicationDataAccess implements LoanApplicationDataAccessContr
 		try {
 			DataAccessUtility.regsiterDriver();
 			connection = DataAccessUtility.createConnection();
-			query = "select * from loan_applications where application_status=?";
-			prepstatement = DataAccessUtility.prepareStatement(connection, query);
-			prepstatement.setString(1, status);
+			if(approvalStatus.equalsIgnoreCase("all")) {
+				query = "select * from loan_applications";
+				prepstatement = DataAccessUtility.prepareStatement(connection, query);
+			}
+			else {
+				query = "select * from loan_applications where application_status=?";
+				prepstatement = DataAccessUtility.prepareStatement(connection, query);
+				prepstatement.setString(1, status);
+			}
 
 			resultSet = prepstatement.executeQuery();
 			applications = new ArrayList<LoanApplication>();

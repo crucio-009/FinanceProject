@@ -133,9 +133,9 @@ public class LoanApplicationBusinessComponent implements LoanApplicationBusiness
 	}
 
 	@Override
-	public Boolean modifyStatus(String id, String status) throws BusinessComponetException {
+	public Boolean modifyStatus(String id, String status, String customerid) throws BusinessComponetException {
 		try {
-			Boolean flag = lapdao.updateStatus(id, status);
+			Boolean flag = lapdao.updateStatus(id, status, customerid);
 			if (flag == null) {
 				throw new BusinessComponetException("Loan Application details could not be modified");
 			} else {

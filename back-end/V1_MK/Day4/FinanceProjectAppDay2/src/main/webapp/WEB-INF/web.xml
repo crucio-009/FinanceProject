@@ -10,41 +10,12 @@
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
   <servlet>
-    <!-- <servlet-name>FinanceApp-Servlet</servlet-name>
-    <servlet-class>
-  		org.glassfish.jersey.servlet.ServletContainer
-  	</servlet-class> -->
   	<servlet-name>jakarta.ws.rs.core.Application</servlet-name>
-    <!-- <init-param>
-      <param-name>jersey.config.server.provider.packages</param-name>
-      <param-value>
-  			com.java.financeprojectapp.servicelayer.services
-  	  </param-value>
-    </init-param>
-    <init-param>
-      <param-name>jakarta.ws.rs.ext.provider</param-name>
-      <param-value>
-  			com.java.financeprojectapp.servicelayer.entities
-  	  </param-value>
-  	</init-param>  
-    <init-param>
-      <param-name>jakarta.ws.rs.container.ContainerRequestFilter</param-name>
-      <param-value>
-  			com.java.financeprojectapp.servicelayer.entities
-  	  </param-value>
-    </init-param> -->
   </servlet>
   <servlet-mapping>
-    <!-- <servlet-name>FinanceApp-Servlet</servlet-name> -->
     <servlet-name>jakarta.ws.rs.core.Application</servlet-name>
     <url-pattern>
  	/rest/*
   </url-pattern>
   </servlet-mapping>
-  <!-- <resource-ref> 
-   <description>description</description>  
-   <res-ref-name>mail/MailSession3</res-ref-name>
-   <res-type>javax.mail.Session</res-type>  
-   <res-auth>Container</res-auth>
-</resource-ref> -->
 </web-app>

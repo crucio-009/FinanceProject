@@ -8,7 +8,7 @@ import com.java.financeprojectapp.exceptions.DataAccessException;
 
 public interface LoanApplicationDataAccessContract extends DataAccessContract<LoanApplication, String> {
 
-	Boolean updateStatus(String id, String status) throws DataAccessException;
+	Boolean updateStatus(String id, String status, String customerid) throws DataAccessException;
 	
 	Boolean updateAmount(String id, Float amount) throws DataAccessException;
 

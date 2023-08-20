@@ -17,6 +17,7 @@ import com.java.financeprojectapp.exceptions.DataAccessException;
 import com.java.financeprojectapp.servicelayer.entities.RandomPasswordGenerator;
 
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.InternalServerErrorException;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.MediaType;
@@ -25,10 +26,7 @@ import jakarta.ws.rs.core.Response;
 @Path("/mail")
 public class MailService {
 	
-	@POST
-    @Path("/send")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response sendEmail(EmailRequest emailRequest) {
+    public void sendEmail(EmailRequest emailRequest) {
         try {
             String host = "smtp.gmail.com";
             final String username = ""; // Replace with your Gmail email
@@ -56,12 +54,8 @@ public class MailService {
             message.setText(emailRequest.getBody());
 
             Transport.send(message);
-
-            return Response.ok("Email sent successfully").build();
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                    .entity("Error sending email: " + e.getMessage())
-                    .build();
+        	throw new InternalServerErrorException("Error sending email: " + e.getMessage());
         }
     }
 	

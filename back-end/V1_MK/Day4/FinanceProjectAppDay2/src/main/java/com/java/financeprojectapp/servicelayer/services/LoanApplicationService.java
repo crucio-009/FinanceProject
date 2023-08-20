@@ -147,9 +147,9 @@ public class LoanApplicationService {
 	@POST
 	@Path("/updatestatus/{id}")
 	public ServiceResponse<Boolean> modifyApplicationStatus(@PathParam("id") String id,
-			@QueryParam("status") String status) throws Exception {
+			@QueryParam("status") String status, @QueryParam("customerid") String customerid) throws Exception {
 		try {
-			Boolean flag = labo.modifyStatus(id, status);
+			Boolean flag = labo.modifyStatus(id, status, customerid);
 			return new ServiceResponse<Boolean>("record updated", 200, flag);
 		} catch (Exception e) {
 			return new ServiceResponse<Boolean>(e.getMessage(), 500, null);

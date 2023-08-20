@@ -16,7 +16,7 @@ public interface LoanApplicationBusinessComponentContract extends BusinessCompon
 
 	List<LoanApplication> getPendingApplications() throws BusinessComponetException;
 
-	Boolean modifyStatus(String id, String status) throws BusinessComponetException;
+	Boolean modifyStatus(String id, String status, String customerid) throws BusinessComponetException;
 	
 	Boolean modifyAmount(String id, Float amount) throws BusinessComponetException;
 }
