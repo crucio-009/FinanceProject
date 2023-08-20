@@ -17,4 +17,6 @@ public interface LoanApplicationDataAccessContract extends DataAccessContract<Lo
 	List<LoanApplication> fetchByDate(String date) throws DataAccessException;
 
 	List<LoanApplication> fetchByType(String type) throws DataAccessException;
+	
+	List<LoanApplication> fetchByCustIdAndType(String id, String type) throws DataAccessException;
 }

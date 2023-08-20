@@ -11,6 +11,8 @@ public interface LoanApplicationBusinessComponentContract extends BusinessCompon
 	List<LoanApplication> getLoanApplicationsByDate(String date) throws BusinessComponetException;
 
 	List<LoanApplication> getLoanApplicationsByType(String type) throws BusinessComponetException;
+	
+	List<LoanApplication> getLoanApplicationsByCustIdType(String id, String type) throws BusinessComponetException;
 
 	List<LoanApplication> getPendingApplications() throws BusinessComponetException;
 

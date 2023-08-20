@@ -41,4 +41,10 @@
  	/rest/*
   </url-pattern>
   </servlet-mapping>
+  <!-- <resource-ref> 
+   <description>description</description>  
+   <res-ref-name>mail/MailSession3</res-ref-name>
+   <res-type>javax.mail.Session</res-type>  
+   <res-auth>Container</res-auth>
+</resource-ref> -->
 </web-app>

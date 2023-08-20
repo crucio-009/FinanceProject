@@ -601,4 +601,76 @@ public class LoanApplicationDataAccess implements LoanApplicationDataAccessContr
 		}
 	}
 
+	@Override
+	public List<LoanApplication> fetchByCustIdAndType(String id, String type) throws DataAccessException {
+		Connection connection = null;
+		PreparedStatement prepstatement = null;
+		ResultSet resultSet = null;
+		String query = null;
+		String status = type.toUpperCase();
+		List<LoanApplication> applications = null;
+		try {
+			DataAccessUtility.regsiterDriver();
+			connection = DataAccessUtility.createConnection();if(type.equalsIgnoreCase("All")) {
+				query = "select * from loan_applications where customer_id=?";
+				prepstatement = DataAccessUtility.prepareStatement(connection, query);
+				prepstatement.setString(1, id);
+			} else {
+				query = "select * from loan_applications where customer_id=? and application_status=?";
+				prepstatement = DataAccessUtility.prepareStatement(connection, query);
+				prepstatement.setString(1, id);
+				prepstatement.setString(2, status);
+			}
+
+			resultSet = prepstatement.executeQuery();
+			applications = new ArrayList<LoanApplication>();
+			while (resultSet.next()) {
+				LoanApplication application = new LoanApplication();
+				StringBuffer bufone = new StringBuffer();
+				StringBuffer buftwo = new StringBuffer();
+				String temp = null;
+				BufferedReader readerone = new BufferedReader(
+						new InputStreamReader(resultSet.getBlob("document_one").getBinaryStream()));
+				BufferedReader readertwo = new BufferedReader(
+						new InputStreamReader(resultSet.getBlob("document_two").getBinaryStream()));
+				while ((temp = readerone.readLine()) != null) {
+					bufone.append(temp);
+				}
+				while ((temp = readertwo.readLine()) != null) {
+					buftwo.append(temp);
+				}
+				application.setApplicationId(resultSet.getString("application_id"));
+				application.setCustomerId(resultSet.getString("customer_id"));
+				application.setLoanId(resultSet.getInt("loan_id"));
+				application.setLoanAmount(resultSet.getFloat("loan_amount"));
+				application.setTenure(resultSet.getInt("tenure"));
+				application.setApplicationDate(resultSet.getDate("application_date"));
+				application.setApplicationStatus(resultSet.getString("application_status"));
+				application.setRemarks(resultSet.getString("remarks"));
+				application.setInterestRate(resultSet.getFloat("interest_rate"));
+				application.setDocumentOne(bufone.toString());
+				application.setDocumentTwo(buftwo.toString());
+				applications.add(application);
+			}
+		} catch (SQLException e) {
+			DataAccessException dataEx = new DataAccessException(e.getMessage(), e);
+			throw dataEx;
+		} catch (ClassNotFoundException e) {
+			DataAccessException dataEx = new DataAccessException(e.getMessage(), e);
+			throw dataEx;
+		} catch (Exception e) {
+			DataAccessException dataEx = new DataAccessException(e.getMessage(), e);
+			throw dataEx;
+		} finally {
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (SQLException e) {
+				DataAccessException dataEx = new DataAccessException(e.getMessage(), e);
+				throw dataEx;
+			}
+		}
+		return applications;
+	}
+
 }

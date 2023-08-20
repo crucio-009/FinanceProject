@@ -54,9 +54,22 @@ public class LoanApplicationService {
 			return new ServiceResponse<LoanApplication>(e.getMessage(), 500, null);
 		}
 	}
+	
+	@GET
+	@Path("/get/customer/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+//	@Secured({Role.CUSTOMER})
+	public ServiceResponse<List<LoanApplication>> retrieveLoanApplicationByCustomerAndType(@PathParam("id") String id, @QueryParam("type") String type) throws Exception {
+		try {
+			List<LoanApplication> list = labo.getLoanApplicationsByCustIdType(id, type);
+			return new ServiceResponse<List<LoanApplication>>("record found", 200, list);
+		} catch (Exception e) {
+			return new ServiceResponse<List<LoanApplication>>(e.getMessage(), 500, null);
+		}
+	}
 
 	@GET
-	@Path("/get")
+	@Path("/get/date")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ServiceResponse<List<LoanApplication>> retrieveLoanApplicationByDate(@QueryParam("date") String date)
 			throws Exception {
