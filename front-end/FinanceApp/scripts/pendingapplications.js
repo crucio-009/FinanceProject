@@ -38,19 +38,22 @@ function getLoanApplications(){
                     const approveButton = document.createElement("button");
                     approveButton.innerText = "Approve";
                     approveButton.classList.add('btn','btn-success')
+                    approveButton.classList.add('btn','me-1')
                     approveButton.addEventListener("click", () => {
                         
                         const req=new XMLHttpRequest();
+
                         req.onreadystatechange = () =>{
                         if (req.status === 200 && req.readyState === 4) {
-                            console.log("Yes");
-                            
+
                             window.alert("Loan Application Approved!");
-                            location.reload();                            
+                            //sendEmail(localStorage.getItem('customeremailid','Loan Application Approved','Congratulations!!, Your Loan Application has been approved.')
+                            location.reload();          
+
                         }
                     }
                         
-                        req.open('POST', `http://localhost:8080/FinanceProjectAppDay2/rest/loan/applications/updatestatus/${tdId.innerText}?status=approved`);
+                        req.open('POST', `http://localhost:8080/FinanceProjectAppDay2/rest/loan/applications/updatestatus/${tdId.innerText}?status=approved&customerid=${tdcusId.innerText}`);
                         req.setRequestHeader("Content-Type","application/json")
                         req.send()
                     
@@ -60,6 +63,7 @@ function getLoanApplications(){
                     const rejectButton = document.createElement("button");
                     rejectButton.innerText = "Reject";
                     rejectButton.classList.add('btn','btn-danger')
+                    //rejectButton.classList.add('btn','m-2')
                     rejectButton.addEventListener("click", () => {
                         const req=new XMLHttpRequest();
                         req.onreadystatechange = ()=>{
@@ -68,7 +72,7 @@ function getLoanApplications(){
                             location.reload();                            
                         }
                     }
-                        req.open('POST', `http://localhost:8080/FinanceProjectAppDay2/rest/loan/applications/updatestatus/${tdId.innerText}?status=rejected`);
+                        req.open('POST', `http://localhost:8080/FinanceProjectAppDay2/rest/loan/applications/updatestatus/${tdId.innerText}?status=rejected&customerid=${tdcusId.innerText}`);
                         req.send()
                     });
 

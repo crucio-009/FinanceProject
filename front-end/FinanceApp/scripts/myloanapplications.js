@@ -24,8 +24,8 @@ function getLoanApplicationsByType(){
                     const tdId = document.createElement('td')
                     tdId.innerText = data.applicationId.toString()
 
-                    const tdcusId = document.createElement('td')
-                    tdcusId.innerText = data.customerId.toString()
+                    // const tdcusId = document.createElement('td')
+                    // tdcusId.innerText = data.customerId.toString()
 
                     const tdloanId = document.createElement('td')
                     tdloanId.innerText = data.loanId.toString()
@@ -61,13 +61,46 @@ function getLoanApplicationsByType(){
                     const tdImg = document.createElement('td')
                     tdImg.appendChild(imgEle)
 
-                    const row = document.createElement('tr')
-                    row.append(tdId,tdcusId,tdloanId,tdloanAmount,tdinterestRate,tdtenure,tdapplicationDate,tdapplicationStatus,tdremarks,tdImg)
 
-                    tableBody.append(row)
+                if(selectedOption.value=="PENDING"){
+                    const tdDeleteElement = document.createElement("td");
+                    // Create the "Delete" button
+                    const deleteButton = document.createElement("button");
+                    deleteButton.innerText = "Cancel";
+                    deleteButton.classList.add('btn','btn-danger')
+
+                    deleteButton.addEventListener("click", () => {
+                        
+                        const req=new XMLHttpRequest();
+
+                        req.onreadystatechange = () =>{
+
+                        if (req.status === 200 && req.readyState === 4) {
+                            
+                             window.alert("Loan Application Cancelled!");
+                              location.reload();          
+
+                            }
+
+                        }
+                        req.open('POST', `http://localhost:8080/FinanceProjectAppDay2/rest/loan/applications/delete/${tdId.innerText}`);
+                        req.setRequestHeader("Content-Type","application/json")
+                        req.send()
+                    });
+
+                    tdDeleteElement.appendChild(deleteButton);
+                    const row = document.createElement('tr')
+                    row.append(tdId,tdloanId,tdloanAmount,tdinterestRate,tdtenure,tdapplicationDate,tdapplicationStatus,tdremarks,tdImg,tdDeleteElement)
+                    tableBody.append(row);
+                    }
+                    else{
+                    const row = document.createElement('tr')
+                    row.append(tdId,tdloanId,tdloanAmount,tdinterestRate,tdtenure,tdapplicationDate,tdapplicationStatus,tdremarks,tdImg)
+                    tableBody.append(row);
+                    }
                 }
+            }
         }
-    }
 
     req.open('GET', `http://localhost:8080/FinanceProjectAppDay2/rest/loan/applications/get/customer/${custid}?type=${selectedOption.value}`)
     const token=localStorage.getItem('token')
