@@ -13,7 +13,10 @@ import java.util.regex.Pattern;
 import com.java.financeprojectapp.dataaccess.abstractions.CustomerDataAccessContract;
 import com.java.financeprojectapp.dataaccess.utility.DataAccessUtility;
 import com.java.financeprojectapp.entities.Customer;
+import com.java.financeprojectapp.entities.EmailRequest;
 import com.java.financeprojectapp.exceptions.DataAccessException;
+import com.java.financeprojectapp.servicelayer.entities.RandomPasswordGenerator;
+import com.java.financeprojectapp.servicelayer.services.MailService;
 
 public class CustomerDataAccess implements CustomerDataAccessContract {
 
@@ -132,6 +135,33 @@ public class CustomerDataAccess implements CustomerDataAccessContract {
 			prepstatement.setString(5, c.getEmailId());
 
 			result = prepstatement.executeUpdate();
+
+			if (result != null) {
+				// set variables for email request body
+
+				String loginpassword = RandomPasswordGenerator.generateRandomPassword(15);
+				String tomail = c.getEmailId();
+				String subject = "New Login Credentials";
+				String body = "We're excited to inform you that your new login credentials have been generated and are ready for use. Please find below your login details:\r\n"
+						+ "\r\n" + "Customer Id: " + CustomerId + "\r\n" +"Username: " + c.getEmailId() + "\r\n" + "Password: " + loginpassword + "\r\n"
+						+ "\r\n"
+						+ "For security purposes, we recommend that you change your password upon logging in for the first time. To do so, please follow the steps outlined on our website's password reset page.\r\n"
+						+ "\r\n"
+						+ "If you encounter any issues or have any questions regarding your new login credentials, please don't hesitate to reach out to our support team at manishssssskumaraaaaa@gmail.com. We're here to assist you every step of the way.\r\n"
+						+ "\r\n"
+						+ "Thank you for choosing Ganesh Finance Limited Company for your Loan needs. We look forward to serving you and ensuring a seamless experience.\r\n"
+						+ "\r\n" + "Best regards,\r\n" + "\r\n" + "Ganesh Finance Limited Company\r\n"
+						+ "manishssssskumaraaaaa@gmail.com\r\n" + "\r\n" + "\r\n" + "\r\n" + "\r\n" + "\r\n" + "";
+
+				EmailRequest emailRequest = new EmailRequest(tomail, subject, body);
+
+				UserCredentialsDataAccess ucdao = new UserCredentialsDataAccess();
+				Boolean flag = ucdao.insert(emailRequest.getTo(), loginpassword, 0);
+				if (flag) {
+					MailService mailservice = new MailService();
+					mailservice.sendEmail(emailRequest);
+				}
+			}
 		} catch (SQLException e) {
 			DataAccessException dataEx = new DataAccessException(e.getMessage(), e);
 			throw dataEx;

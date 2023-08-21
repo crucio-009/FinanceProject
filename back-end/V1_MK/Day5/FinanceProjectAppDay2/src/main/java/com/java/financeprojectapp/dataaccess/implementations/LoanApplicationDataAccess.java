@@ -14,6 +14,7 @@ import java.util.UUID;
 
 import com.java.financeprojectapp.dataaccess.abstractions.LoanApplicationDataAccessContract;
 import com.java.financeprojectapp.dataaccess.utility.DataAccessUtility;
+import com.java.financeprojectapp.entities.Customer;
 import com.java.financeprojectapp.entities.EmailRequest;
 import com.java.financeprojectapp.entities.LoanApplication;
 import com.java.financeprojectapp.exceptions.DataAccessException;
@@ -185,6 +186,29 @@ public class LoanApplicationDataAccess implements LoanApplicationDataAccessContr
 			prepstatement.setBlob(11, blobtwo);
 
 			result = prepstatement.executeUpdate();
+			
+			if(result != null) {
+				// set variables for email request body
+				CustomerDataAccess cdao = new CustomerDataAccess();
+				Customer c = cdao.fetchById(la.getCustomerId());
+				
+				String footer = " Please find below your Loan Application Id.\r\n" + "\r\n" + "Application Id: "
+						+ LoanApplicationId + "\n\r\n"
+						+ "If you encounter any issues or have any questions regarding your new loan applications, please don't hesitate to reach out to our support team at manishssssskumaraaaaa@gmail.com. We're here to assist you every step of the way.\r\n"
+						+ "\r\n"
+						+ "Thank you for choosing Ganesh Finance Limited Company for your Loan needs. We look forward to serving you and ensuring a seamless experience.\r\n"
+						+ "\r\n" + "Best regards,\r\n" + "\r\n" + "Ganesh Finance Limited Company\r\n"
+						+ "manishssssskumaraaaaa@gmail.com\r\n" + "\r\n" + "\r\n" + "\r\n" + "\r\n" + "\r\n" + "";
+				
+				String tomail = c.getEmailId();
+				String subject = "Loan Application Pending";
+				String body = "We are processing you Loan Application";
+				EmailRequest emailRequest = new EmailRequest(tomail, subject, body + footer);
+
+				MailService mailservice = new MailService();
+				mailservice.sendEmail(emailRequest);
+			}
+			
 		} catch (SQLException e) {
 			DataAccessException dataEx = new DataAccessException(e.getMessage(), e);
 			throw dataEx;
