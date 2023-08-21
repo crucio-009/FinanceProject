@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan EMI Calculator</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Loan EMI Calculator</h2>
+        <ul class="nav nav-tabs mb-3">
+            <li class="nav-item">
+                <a class="nav-link active" data-bs-toggle="tab" href="#home">Home Loan</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#car">Car Loan</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#personal">Personal Loan</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade show active">
+                <!-- Home Loan Calculator -->
+                <form id="homeEmiForm">
+                    <div class="mb-3">
+                        <label for="homePrincipal" class="form-label">Principal Amount</label>
+                        <div class="d-flex">
+                            <span>500000&nbsp;</span>
+                            <input type="range" class="form-range" id="homePrincipal" min="500000" max="50000000" step="100000" value="1000000">
+                            <span>&nbsp;50000000</span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        Principal: <span id="homePrincipalOutput"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="homeInterestRate" class="form-label">Interest Rate (%)</label>
+                        <div class="d-flex">
+                            <span>1&nbsp;</span>
+                            <input type="range" class="form-range" id="homeInterestRate" min="1" max="20" step="0.1" value="8.5">
+                            <span>&nbsp;20</span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        Interest Rate: <span id="homeInterestOutput"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="homeLoanTenure" class="form-label">Loan Tenure (months)</label>
+                        <div class="d-flex">
+                            <span>3&nbsp;</span>
+                            <input type="range" class="form-range" id="homeLoanTenure" min="3" max="72" step="1" value="12">
+                            <span>&nbsp;72</span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        Tenure: <span id="homeTenureOutput"></span>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="homeCalculateBtn">Calculate EMI</button>
+                </form>
+                <div id="homeEmiResult" class="mt-4"></div>
+                <div class="mt-4">
+                    <h5>Principal and Interest Paid Pie Chart</h5>
+                    <canvas id="homePieChart" width="200" height="200"></canvas>
+                </div>
+            </div>
+            <div id="car" class="tab-pane fade">
+                <!-- Car Loan Calculator -->
+                <form id="carEmiForm">
+                    <div class="mb-3">
+                        <label for="carPrincipal" class="form-label">Principal Amount</label>
+                        <div class="d-flex">
+                            <span>500000&nbsp;</span>
+                            <input type="range" class="form-range" id="carPrincipal" min="500000" max="10000000" step="100000" value="1000000">
+                            <span>&nbsp;10000000</span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        Principal: <span id="carPrincipalOutput"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="carInterestRate" class="form-label">Interest Rate (%)</label>
+                        <div class="d-flex">
+                            <span>1&nbsp;</span>
+                            <input type="range" class="form-range" id="carInterestRate" min="1" max="20" step="0.1" value="7.5">
+                            <span>&nbsp;20</span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        Interest Rate: <span id="carInterestOutput"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="carLoanTenure" class="form-label">Loan Tenure (months)</label>
+                        <div class="d-flex">
+                            <span>12&nbsp;</span>
+                            <input type="range" class="form-range" id="carLoanTenure" min="12" max="72" step="1" value="24">
+                            <span>&nbsp;24</span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        Tenure: <span id="carTenureOutput"></span>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="carCalculateBtn">Calculate EMI</button>
+                </form>
+                <div id="carEmiResult" class="mt-4"></div>
+                <div class="mt-4">
+                    <h5>Principal and Interest Paid Pie Chart</h5>
+                    <canvas id="carPieChart" width="200" height="200"></canvas>
+                </div>
+            </div>
+            <div id="personal" class="tab-pane fade">
+                <!-- Personal Loan Calculator -->
+                <form id="personalEmiForm">
+                    <div class="mb-3">
+                        <label for="homePrincipal" class="form-label">Principal Amount</label>
+                        <div class="d-flex">
+                            <span>100000&nbsp;</span>
+                            <input type="range" class="form-range" id="personalPrincipal" min="100000" max="10000000" step="50000" value="500000">
+                            <span>&nbsp;10000000</span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        Principal: <span id="personalPrincipalOutput"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="personalInterestRate" class="form-label">Interest Rate (%)</label>
+                        <div class="d-flex">
+                            <span>1&nbsp;</span>
+                            <input type="range" class="form-range" id="personalInterestRate" min="1" max="20" step="0.1" value="8.5">
+                            <span>&nbsp;20</span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        Interest Rate: <span id="personalInterestOutput"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="personalLoanTenure" class="form-label">Loan Tenure (months)</label>
+                        <div class="d-flex">
+                            <span>3&nbsp;</span>
+                            <input type="range" class="form-range" id="personalLoanTenure" min="3" max="72" step="1" value="12">
+                            <span>&nbsp;72</span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        Tenure: <span id="personalTenureOutput"></span>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="personalCalculateBtn">Calculate EMI</button>
+                </form>
+                <div id="personalEmiResult" class="mt-4"></div>
+                <div class="mt-4">
+                    <h5>Principal and Interest Paid Pie Chart</h5>
+                    <canvas id="personalPieChart" width="200" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS and Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+
+        var chartInstances = {}; // To store chart instances for different tabs
+
+        // Draw Pie Chart
+        function calculateLoan(type, principal, totalInterest) {
+            // Get loan type specific inputs and calculate EMI
+            // Calculate pie chart data
+            var interestPaid = totalInterest;
+
+            var pieChartCanvas = document.getElementById(type + 'PieChart').getContext('2d');
+            var existingChart = chartInstances[type];
+
+            if (existingChart) {
+                existingChart.destroy(); // Destroy existing chart instance
+            }
+
+            var pieChartData = {
+                labels: ['Principal Paid', 'Interest Paid'],
+                datasets: [{
+                    data: [principal, interestPaid],
+                    backgroundColor: ['#007bff', '#dc3545'],
+                }]
+            };
+
+            var pieChartConfig = {
+                type: 'pie',
+                data: pieChartData
+            };
+
+            chartInstances[type] = new Chart(pieChartCanvas, pieChartConfig);
+        }
+
+        // Calculate EMI
+        function calculateEmi(principal, interestRate, loanTenure){
+            var monthlyInterestRate = (interestRate / 100) / 12;
+            var emi = (principal * monthlyInterestRate) * (Math.pow(1 + monthlyInterestRate, loanTenure)) / (Math.pow(1 + monthlyInterestRate, loanTenure) - 1);
+            return emi;
+        }
+
+        // Home Loan Calculator
+        var homePrincipalInput = document.getElementById('homePrincipal');
+        var homeInterestRateInput = document.getElementById('homeInterestRate');
+        var homeLoanTenureInput = document.getElementById('homeLoanTenure');
+        var homeCalculateBtn = document.getElementById('homeCalculateBtn');
+
+        homeCalculateBtn.addEventListener('click', function () {
+            var principal = parseFloat(homePrincipalInput.value);
+            var interestRate = parseFloat(homeInterestRateInput.value);
+            var loanTenure = parseFloat(homeLoanTenureInput.value);
+
+            var emi = calculateEmi(principal, interestRate, loanTenure);
+            var totalInterest = emi * loanTenure - principal;
+
+            var homeEmiResultDiv = document.getElementById("homeEmiResult");
+            homeEmiResultDiv.innerHTML = `<p><strong>EMI:</strong> ₹${emi.toFixed(2)}</p>`;
+
+            calculateLoan('home', principal, totalInterest);
+        });
+
+        // Display Slider Output
+        var homePrincipalOutput = document.getElementById('homePrincipalOutput');
+        var homeInterestOutput = document.getElementById('homeInterestOutput');
+        var homeTenureOutput = document.getElementById('homeTenureOutput');
+        homePrincipalOutput.innerHTML = homePrincipalInput.value;
+        homeTenureOutput.innerHTML = homeLoanTenureInput.value;
+        homeInterestOutput.innerHTML = homeInterestRateInput.value;
+
+        var emi = calculateEmi(homePrincipalInput.value, homeInterestRateInput.value, homeLoanTenureInput.value);
+        var totalInterest = emi *  homeLoanTenureInput.value - homePrincipalInput.value;
+
+        var homeEmiResultDiv = document.getElementById("homeEmiResult");
+        homeEmiResultDiv.innerHTML = `<p><strong>EMI:</strong> ₹${emi.toFixed(2)}</p>`;
+
+        calculateLoan('home', homePrincipalInput.value, totalInterest);
+
+        homePrincipalInput.oninput = function() {
+            homePrincipalOutput.innerHTML = this.value;
+        }
+
+        homeInterestRateInput.oninput = function() {
+            homeInterestOutput.innerHTML = this.value;
+        }
+
+        homeLoanTenureInput.oninput = function() {
+            homeTenureOutput.innerHTML = this.value;
+        }
+
+        // Similar calculations and event listeners for Car Loan and Personal Loan
+        // Car Loan Calculator
+        var carPrincipalInput = document.getElementById('carPrincipal');
+        var carInterestRateInput = document.getElementById('carInterestRate');
+        var carLoanTenureInput = document.getElementById('carLoanTenure');
+        var carCalculateBtn = document.getElementById('carCalculateBtn');
+
+        carCalculateBtn.addEventListener('click', function () {
+            var principal = parseFloat(carPrincipalInput.value);
+            var interestRate = parseFloat(carInterestRateInput.value);
+            var loanTenure = parseFloat(carLoanTenureInput.value);
+
+            var emi = calculateEmi(principal, interestRate, loanTenure);
+            var totalInterest = emi * loanTenure - principal;
+            
+            var carEmiResultDiv = document.getElementById("carEmiResult");
+            carEmiResultDiv.innerHTML = `<p><strong>EMI:</strong> ₹${emi.toFixed(2)}</p>`;
+            
+            calculateLoan('car', principal, totalInterest);
+        });
+
+        // Display Slider Output
+        var carPrincipalOutput = document.getElementById('carPrincipalOutput');
+        var carInterestOutput = document.getElementById('carInterestOutput');
+        var carTenureOutput = document.getElementById('carTenureOutput');
+        carPrincipalOutput.innerHTML = carPrincipalInput.value;
+        carTenureOutput.innerHTML = carLoanTenureInput.value;
+        carInterestOutput.innerHTML = carInterestRateInput.value;
+
+        var emi = calculateEmi(carPrincipalInput.value, carInterestRateInput.value, carLoanTenureInput.value);
+        var totalInterest = emi *  carLoanTenureInput.value - carPrincipalInput.value;
+
+        var carEmiResultDiv = document.getElementById("carEmiResult");
+        carEmiResultDiv.innerHTML = `<p><strong>EMI:</strong> ₹${emi.toFixed(2)}</p>`;
+        
+        calculateLoan('car', carPrincipalInput.value, totalInterest);
+
+        carPrincipalInput.oninput = function() {
+            carPrincipalOutput.innerHTML = this.value;
+        }
+
+        carInterestRateInput.oninput = function() {
+            carInterestOutput.innerHTML = this.value;
+        }
+
+        carLoanTenureInput.oninput = function() {
+            carTenureOutput.innerHTML = this.value;
+        }
+
+        // Personal Loan Calculator
+        var personalPrincipalInput = document.getElementById('personalPrincipal');
+        var personalInterestRateInput = document.getElementById('personalInterestRate');
+        var personalLoanTenureInput = document.getElementById('personalLoanTenure');
+        var personalCalculateBtn = document.getElementById('personalCalculateBtn');
+
+        personalCalculateBtn.addEventListener('click', function () {
+            var principal = parseFloat(personalPrincipalInput.value);
+            var interestRate = parseFloat(personalInterestRateInput.value);
+            var loanTenure = parseFloat(personalLoanTenureInput.value);
+
+            var emi = calculateEmi(principal, interestRate, loanTenure);
+            var totalInterest = emi * loanTenure - principal;
+  
+            var personalEmiResultDiv = document.getElementById("personalEmiResult");
+            personalEmiResultDiv.innerHTML = `<p><strong>EMI:</strong> ₹${emi.toFixed(2)}</p>`;
+
+            calculateLoan('personal', principal, totalInterest);
+        });
+
+        // Display Slider Output
+        var personalPrincipalOutput = document.getElementById('personalPrincipalOutput');
+        var personalInterestOutput = document.getElementById('personalInterestOutput');
+        var personalTenureOutput = document.getElementById('personalTenureOutput');
+        personalPrincipalOutput.innerHTML = personalPrincipalInput.value;
+        personalTenureOutput.innerHTML = personalLoanTenureInput.value;
+        personalInterestOutput.innerHTML = personalInterestRateInput.value;
+
+        var emi = calculateEmi(personalPrincipalInput.value, personalInterestRateInput.value, personalLoanTenureInput.value);
+        var totalInterest = emi *  personalLoanTenureInput.value - personalPrincipalInput.value;
+
+        var personalEmiResultDiv = document.getElementById("personalEmiResult");
+        personalEmiResultDiv.innerHTML = `<p><strong>EMI:</strong> ₹${emi.toFixed(2)}</p>`;
+
+        calculateLoan('personal', homePrincipalInput.value, totalInterest);
+
+        personalPrincipalInput.oninput = function() {
+            personalPrincipalOutput.innerHTML = this.value;
+        }
+
+        personalInterestRateInput.oninput = function() {
+            personalInterestOutput.innerHTML = this.value;
+        }
+
+        personalLoanTenureInput.oninput = function() {
+            personalTenureOutput.innerHTML = this.value;
+        }
+    </script>
+</body>
+</html>
