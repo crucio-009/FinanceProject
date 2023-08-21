@@ -232,7 +232,7 @@ public class LoanApplicationBusinessComponent implements LoanApplicationBusiness
 	}
 
 	@Override
-	public List<LoanApplication> getLoanApplicationsByLoanId(String id) throws BusinessComponetException {
+	public List<LoanApplication> getLoanApplicationsByLoanId(int id) throws BusinessComponetException {
 		try {
 			List<LoanApplication> list = lapdao.fetchByLoanId(id);
 			if (list == null) {

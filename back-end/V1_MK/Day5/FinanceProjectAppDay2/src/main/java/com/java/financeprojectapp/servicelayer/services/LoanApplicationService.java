@@ -59,7 +59,7 @@ public class LoanApplicationService {
 	@Path("/get/loan/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 //	@Secured({Role.CUSTOMER})
-	public ServiceResponse<List<LoanApplication>> retrieveLoanApplicationByLoanId(@PathParam("id") String id)
+	public ServiceResponse<List<LoanApplication>> retrieveLoanApplicationByLoanId(@PathParam("id") int id)
 			throws Exception {
 		try {
 			List<LoanApplication> list = labo.getLoanApplicationsByLoanId(id);

@@ -739,8 +739,8 @@ public class LoanApplicationDataAccess implements LoanApplicationDataAccessContr
 	}
 
 	@Override
-	public List<LoanApplication> fetchByLoanId(String id) throws DataAccessException {
-		if (id != null) {
+	public List<LoanApplication> fetchByLoanId(int id) throws DataAccessException {
+		if ((Integer)id != null) {
 			Connection connection = null;
 			PreparedStatement prepstatement = null;
 			ResultSet resultSet = null;
@@ -751,7 +751,7 @@ public class LoanApplicationDataAccess implements LoanApplicationDataAccessContr
 				connection = DataAccessUtility.createConnection();
 				query = "select * from loan_applications where loan_id = ?";
 				prepstatement = DataAccessUtility.prepareStatement(connection, query);
-				prepstatement.setString(1, id);
+				prepstatement.setInt(1, id);
 
 				resultSet = prepstatement.executeQuery();
 				applications = new ArrayList<LoanApplication>();

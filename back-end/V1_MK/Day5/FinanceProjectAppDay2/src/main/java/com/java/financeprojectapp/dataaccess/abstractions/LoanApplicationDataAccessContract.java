@@ -18,7 +18,7 @@ public interface LoanApplicationDataAccessContract extends DataAccessContract<Lo
 
 	List<LoanApplication> fetchByType(String type) throws DataAccessException;
 
-	List<LoanApplication> fetchByLoanId(String id) throws DataAccessException;
+	List<LoanApplication> fetchByLoanId(int id) throws DataAccessException;
 
 	List<LoanApplication> fetchByCustIdAndType(String id, String type) throws DataAccessException;
 }
