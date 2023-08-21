@@ -26,8 +26,8 @@ import jakarta.ws.rs.core.Response;
 @Path("/mail")
 public class MailService {
 
-	final String username = "manishssssskumaraaaaa@gmail.com"; // Replace with your Gmail email
-	final String password = "osbzpdwcdbexonng"; // Replace with your Gmail password
+	final String username = ""; // Replace with your Gmail email
+	final String password = ""; // Replace with your Gmail password
 
 	public void sendEmail(EmailRequest emailRequest) {
 		try {
