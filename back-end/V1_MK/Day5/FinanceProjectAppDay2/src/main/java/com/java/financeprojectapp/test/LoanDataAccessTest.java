@@ -1,5 +1,6 @@
 package com.java.financeprojectapp.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.jupiter.api.AfterEach;
@@ -32,19 +33,17 @@ class LoanDataAccessTest {
 	void tearDown() throws Exception {
 		ldao = null;
 	}
-
+	
 	/**
 	 * Test method for
-	 * {@link com.java.financeprojectapp.dataaccess.implementations.LoanDataAccess#insert()}.
+	 * {@link com.java.financeprojectapp.dataaccess.implementations.LoanDataAccess#delete(java.lang.int)}.
 	 */
 	@Test
-	void testInsert() {
+	void testDeleteException() {
 		try {
-			Loan l = new Loan(1111, "Test Loan", (float) 9.99, "Test Loan for JUnit");
-			Boolean flag = ldao.insert(l);
-			assertNotNull(flag);
+			ldao.delete(-1);
 		} catch (DataAccessException e) {
-			e.printStackTrace();
+			assertEquals("negative value not allowed", e.getMessage());
 		}
 	}
 
