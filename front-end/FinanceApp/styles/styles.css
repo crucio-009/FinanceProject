@@ -122,3 +122,12 @@ color: #738292 !important;
     border-top-right-radius: 0;
   }
 
+  .displaychart{
+    height: 400px;
+    margin-left: 20%;
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+     */
+  }
+
