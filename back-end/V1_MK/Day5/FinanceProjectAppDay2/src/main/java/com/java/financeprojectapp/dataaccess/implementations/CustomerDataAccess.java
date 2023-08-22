@@ -143,8 +143,8 @@ public class CustomerDataAccess implements CustomerDataAccessContract {
 				String tomail = c.getEmailId();
 				String subject = "New Login Credentials";
 				String body = "We're excited to inform you that your new login credentials have been generated and are ready for use. Please find below your login details:\r\n"
-						+ "\r\n" + "Customer Id: " + CustomerId + "\r\n" +"Username: " + c.getEmailId() + "\r\n" + "Password: " + loginpassword + "\r\n"
-						+ "\r\n"
+						+ "\r\n" + "Customer Id: " + CustomerId + "\r\n" + "Username: " + c.getEmailId() + "\r\n"
+						+ "Password: " + loginpassword + "\r\n" + "\r\n"
 						+ "For security purposes, we recommend that you change your password upon logging in for the first time. To do so, please follow the steps outlined on our website's password reset page.\r\n"
 						+ "\r\n"
 						+ "If you encounter any issues or have any questions regarding your new login credentials, please don't hesitate to reach out to our support team at manishssssskumaraaaaa@gmail.com. We're here to assist you every step of the way.\r\n"

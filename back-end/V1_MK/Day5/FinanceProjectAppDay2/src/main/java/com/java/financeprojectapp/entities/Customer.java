@@ -73,8 +73,8 @@ public class Customer {
 			return false;
 
 		Customer other = (Customer) arg0;
-		if (!this.customerId.equals(other.customerId))
-		{	System.out.println("hello");
+		if (!this.customerId.equals(other.customerId)) {
+			System.out.println("hello");
 			return false;
 		}
 

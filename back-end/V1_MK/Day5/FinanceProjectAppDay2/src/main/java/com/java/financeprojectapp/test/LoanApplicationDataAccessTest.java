@@ -3,7 +3,8 @@
  */
 package com.java.financeprojectapp.test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ import com.java.financeprojectapp.exceptions.DataAccessException;
  * 
  */
 class LoanApplicationDataAccessTest {
-	
+
 	private LoanApplicationDataAccess lapdao = null;
 
 	/**
@@ -39,7 +40,8 @@ class LoanApplicationDataAccessTest {
 	}
 
 	/**
-	 * Test method for {@link com.java.financeprojectapp.dataaccess.implementations.LoanApplicationDataAccess#fetchByDate(java.lang.String)}.
+	 * Test method for
+	 * {@link com.java.financeprojectapp.dataaccess.implementations.LoanApplicationDataAccess#fetchByDate(java.lang.String)}.
 	 */
 	@Test
 	void testFetchByDate() {
@@ -48,11 +50,12 @@ class LoanApplicationDataAccessTest {
 			assertNotNull(list);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
-		}		
+		}
 	}
 
 	/**
-	 * Test method for {@link com.java.financeprojectapp.dataaccess.implementations.LoanApplicationDataAccess#fetchAllPending()}.
+	 * Test method for
+	 * {@link com.java.financeprojectapp.dataaccess.implementations.LoanApplicationDataAccess#fetchAllPending()}.
 	 */
 	@Test
 	void testFetchAllPending() {
@@ -61,11 +64,12 @@ class LoanApplicationDataAccessTest {
 			assertNotNull(list);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
-		}	
+		}
 	}
 
 	/**
-	 * Test method for {@link com.java.financeprojectapp.dataaccess.implementations.LoanApplicationDataAccess#fetchByType(java.lang.String)}.
+	 * Test method for
+	 * {@link com.java.financeprojectapp.dataaccess.implementations.LoanApplicationDataAccess#fetchByType(java.lang.String)}.
 	 */
 	@Test
 	void testFetchByType() {
@@ -74,11 +78,12 @@ class LoanApplicationDataAccessTest {
 			assertNotNull(list);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
-		}	
+		}
 	}
 
 	/**
-	 * Test method for {@link com.java.financeprojectapp.dataaccess.implementations.LoanApplicationDataAccess#updateAmount(java.lang.String, java.lang.Float)}.
+	 * Test method for
+	 * {@link com.java.financeprojectapp.dataaccess.implementations.LoanApplicationDataAccess#updateAmount(java.lang.String, java.lang.Float)}.
 	 */
 	@Test
 	void testUpdateAmount() {
@@ -91,7 +96,8 @@ class LoanApplicationDataAccessTest {
 	}
 
 	/**
-	 * Test method for {@link com.java.financeprojectapp.dataaccess.implementations.LoanApplicationDataAccess#fetchByCustIdAndType(java.lang.String, java.lang.String)}.
+	 * Test method for
+	 * {@link com.java.financeprojectapp.dataaccess.implementations.LoanApplicationDataAccess#fetchByCustIdAndType(java.lang.String, java.lang.String)}.
 	 */
 	@Test
 	void testFetchByCustIdAndType() {
@@ -100,11 +106,12 @@ class LoanApplicationDataAccessTest {
 			assertNotNull(list);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
-		}	
+		}
 	}
 
 	/**
-	 * Test method for {@link com.java.financeprojectapp.dataaccess.implementations.LoanApplicationDataAccess#fetchByLoanId(java.lang.String)}.
+	 * Test method for
+	 * {@link com.java.financeprojectapp.dataaccess.implementations.LoanApplicationDataAccess#fetchByLoanId(java.lang.String)}.
 	 */
 	@Test
 	void testFetchByLoanId() {
@@ -113,7 +120,7 @@ class LoanApplicationDataAccessTest {
 			assertNotNull(list);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
-		}	
+		}
 	}
 
 }

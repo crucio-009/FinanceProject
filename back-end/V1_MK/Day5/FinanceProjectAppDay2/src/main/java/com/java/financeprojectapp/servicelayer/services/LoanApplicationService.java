@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.java.financeprojectapp.businesslayer.implementations.LoanApplicationBusinessComponent;
 import com.java.financeprojectapp.entities.LoanApplication;
+import com.java.financeprojectapp.servicelayer.entities.Role;
+import com.java.financeprojectapp.servicelayer.entities.Secured;
 import com.java.financeprojectapp.servicelayer.entities.ServiceResponse;
 
 import jakarta.ws.rs.Consumes;
@@ -110,6 +112,7 @@ public class LoanApplicationService {
 	}
 
 	@GET
+	@Secured({Role.CLERK, Role.MANAGER})
 	@Path("/get/pending")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ServiceResponse<List<LoanApplication>> retrievePendingApplications() throws Exception {
@@ -160,6 +163,7 @@ public class LoanApplicationService {
 	}
 
 	@POST
+	@Secured({Role.MANAGER})
 	@Path("/updatestatus/{id}")
 	public ServiceResponse<Boolean> modifyApplicationStatus(@PathParam("id") String id,
 			@QueryParam("status") String status, @QueryParam("customerid") String customerid) throws Exception {

@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.java.financeprojectapp.businesslayer.implementations.CustomerBusinessComponent;
 import com.java.financeprojectapp.entities.Customer;
+import com.java.financeprojectapp.servicelayer.entities.Role;
+import com.java.financeprojectapp.servicelayer.entities.Secured;
 import com.java.financeprojectapp.servicelayer.entities.ServiceResponse;
 
 import jakarta.ws.rs.Consumes;
@@ -57,6 +59,7 @@ public class CustomerService {
 	}
 
 	@POST
+	@Secured({Role.CLERK})
 	@Path("/add")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)

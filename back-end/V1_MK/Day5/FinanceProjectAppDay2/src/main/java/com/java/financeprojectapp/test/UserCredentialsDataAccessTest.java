@@ -19,7 +19,7 @@ import com.java.financeprojectapp.exceptions.DataAccessException;
 class UserCredentialsDataAccessTest {
 
 	private UserCredentialsDataAccess ucdao = null;
-	
+
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -37,7 +37,8 @@ class UserCredentialsDataAccessTest {
 	}
 
 	/**
-	 * Test method for {@link com.java.financeprojectapp.dataaccess.implementations.UserCredentialsDataAccess#insert(java.lang.String, java.lang.String, int)}.
+	 * Test method for
+	 * {@link com.java.financeprojectapp.dataaccess.implementations.UserCredentialsDataAccess#insert(java.lang.String, java.lang.String, int)}.
 	 */
 	@Test
 	void testInsert() {
@@ -50,7 +51,8 @@ class UserCredentialsDataAccessTest {
 	}
 
 	/**
-	 * Test method for {@link com.java.financeprojectapp.dataaccess.implementations.UserCredentialsDataAccess#update(java.lang.String, java.lang.String, java.lang.String, int)}.
+	 * Test method for
+	 * {@link com.java.financeprojectapp.dataaccess.implementations.UserCredentialsDataAccess#update(java.lang.String, java.lang.String, java.lang.String, int)}.
 	 */
 	@Test
 	void testFailedUpdate() {

@@ -52,7 +52,7 @@ class CustomerDataAccessTest {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Test method for
 	 * {@link com.java.financeprojectapp.dataaccess.implementations.CustomerDataAccess#fetchById(java.lang.String)}.
@@ -61,7 +61,8 @@ class CustomerDataAccessTest {
 	void testFetchById() {
 		try {
 			Customer actualCustomer = cdao.fetchById("CUST725b8d82");
-			Customer expectedCustomer = new Customer("CUST725b8d82", "TestCustomer", "Other", "9999999999", "test@test.com");
+			Customer expectedCustomer = new Customer("CUST725b8d82", "TestCustomer", "Other", "9999999999",
+					"test@test.com");
 			assertEquals(expectedCustomer, actualCustomer);
 		} catch (DataAccessException e) {
 			e.printStackTrace();

@@ -33,7 +33,7 @@ class LoanDataAccessTest {
 	void tearDown() throws Exception {
 		ldao = null;
 	}
-	
+
 	/**
 	 * Test method for
 	 * {@link com.java.financeprojectapp.dataaccess.implementations.LoanDataAccess#delete(java.lang.int)}.
