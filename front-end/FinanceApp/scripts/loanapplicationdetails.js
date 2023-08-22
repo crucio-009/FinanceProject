@@ -36,8 +36,8 @@ function getLoanApplications(){
                 const tdapplicationStatus = document.createElement('td')
                 tdapplicationStatus.innerText = data.applicationStatus.toString()
 
-                const tdremarks= document.createElement('td')
-                tdremarks.innerText = (data.remarks==undefined)?"-":data.remarks.toString()
+                // const tdremarks= document.createElement('td')
+                // tdremarks.innerText = (data.remarks==undefined)?"-":data.remarks.toString()
 
                 // const tdcusId = document.createElement('td')
                 // tdcusId.innerText = data.applicationDate.toString()
@@ -52,7 +52,7 @@ function getLoanApplications(){
                 tdImg.appendChild(imgEle)
 
                 const row = document.createElement('tr')
-                row.append(tdId,tdcusId,tdloanId,tdloanAmount,tdinterestRate,tdtenure,tdapplicationDate,tdapplicationStatus,tdremarks,tdImg)
+                row.append(tdId,tdcusId,tdloanId,tdloanAmount,tdinterestRate,tdtenure,tdapplicationDate,tdapplicationStatus,tdImg)
 
                 tableBody.append(row)
             }
@@ -69,8 +69,60 @@ function displayinfo(alldata){
     while(t.firstChild){
         t.removeChild(t.firstChild)
     }
-    for (const data of alldata) {
 
+    //console.log(alldata)
+    if(alldata.length>1){
+        
+        for (const data of alldata) {
+
+            const tdId = document.createElement('td')
+            tdId.innerText = data.applicationId.toString()
+
+            const tdcusId = document.createElement('td')
+            tdcusId.innerText = data.customerId.toString()
+
+            const tdloanId = document.createElement('td')
+            tdloanId.innerText = data.loanId.toString()
+            
+            const tdloanAmount = document.createElement('td')
+            tdloanAmount.innerText = data.loanAmount.toString()
+
+            const tdinterestRate = document.createElement('td')
+            tdinterestRate.innerText = data.interestRate.toString()
+
+            const tdtenure = document.createElement('td')
+            tdtenure.innerText = data.tenure.toString()
+
+            const tdapplicationDate = document.createElement('td')
+            tdapplicationDate.innerText = data.applicationDate.toString().slice(0,-1)
+            //tdapplicationDate.innerText = data.applicationDate.toString()
+
+            const tdapplicationStatus = document.createElement('td')
+            tdapplicationStatus.innerText = data.applicationStatus.toString()
+
+            // const tdremarks= document.createElement('td')
+            // tdremarks.innerText = (data.remarks==undefined)?"-":data.remarks.toString()
+
+            // const tdcusId = document.createElement('td')
+            // tdcusId.innerText = data.applicationDate.toString()
+
+            const imgEle = document.createElement('img')
+            imgEle.src = data.documentOne
+            imgEle.alt = "NA"
+            imgEle.style.width = "200px";
+            imgEle.style.margin = "2px";
+
+            const tdImg = document.createElement('td')
+            tdImg.appendChild(imgEle)
+
+            const row = document.createElement('tr')
+            row.append(tdId,tdcusId,tdloanId,tdloanAmount,tdinterestRate,tdtenure,tdapplicationDate,tdapplicationStatus,tdImg)
+
+            t.append(row)
+        }
+    }
+    else{
+        const data=alldata;
         const tdId = document.createElement('td')
         tdId.innerText = data.applicationId.toString()
 
@@ -96,8 +148,8 @@ function displayinfo(alldata){
         const tdapplicationStatus = document.createElement('td')
         tdapplicationStatus.innerText = data.applicationStatus.toString()
 
-        const tdremarks= document.createElement('td')
-        tdremarks.innerText = (data.remarks==undefined)?"-":data.remarks.toString()
+        // const tdremarks= document.createElement('td')
+        // tdremarks.innerText = (data.remarks==undefined)?"-":data.remarks.toString()
 
         // const tdcusId = document.createElement('td')
         // tdcusId.innerText = data.applicationDate.toString()
@@ -112,9 +164,10 @@ function displayinfo(alldata){
         tdImg.appendChild(imgEle)
 
         const row = document.createElement('tr')
-        row.append(tdId,tdcusId,tdloanId,tdloanAmount,tdinterestRate,tdtenure,tdapplicationDate,tdapplicationStatus,tdremarks,tdImg)
+        row.append(tdId,tdcusId,tdloanId,tdloanAmount,tdinterestRate,tdtenure,tdapplicationDate,tdapplicationStatus,tdImg)
 
         t.append(row)
+
     }
 }
 
@@ -134,18 +187,22 @@ document.getElementById("fetch").addEventListener('click',()=>{
     req.onreadystatechange = ()=>{
         if(req.status === 200 && req.readyState === 4){
             const obj = JSON.parse(req.responseText)
+            //console.log(obj)
             displayinfo(obj.responseData)
         }
     }
 
-    if(selectedOption.value === "I"){
+    if(selectedOption.value === "A"){
         const inputele = document.getElementById("idval").value
         console.log(inputele)
-        
+        req.open('GET',`http://localhost:8080/FinanceProjectAppDay2/rest/loan/applications/get/${inputele}`)
+        req.send()
     }
-    else if(selectedOption.value === "T"){
-        const inputele = document.getElementById("typeval").value
+    else if(selectedOption.value === "L"){
+        const inputele = document.getElementById("loanidval").value
         console.log(inputele)
+        req.open('GET',`http://localhost:8080/FinanceProjectAppDay2/rest/loan/applications/get/loan/${inputele}`)
+        req.send()
     }
     else if(selectedOption.value === "D"){
         const inputele = document.getElementById("dateval").value
@@ -168,16 +225,16 @@ function loadrequired(){
     while(divele.firstChild){
         divele.removeChild(divele.firstChild)
     }
-    if(selectedOption.value === "I"){
+    if(selectedOption.value === "A"){
         const inputele = document.createElement("input")
-        inputele.type = "number"
+        inputele.type = "text"
         inputele.id = "idval"
         divele.appendChild(inputele)
     }
-    else if(selectedOption.value === "T"){
+    else if(selectedOption.value === "L"){
         const inputele = document.createElement("input")
         inputele.type = "text"
-        inputele.id = "typeval"
+        inputele.id = "loanidval"
         divele.appendChild(inputele)
     }
     else if(selectedOption.value === "D"){

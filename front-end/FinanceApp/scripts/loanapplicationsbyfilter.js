@@ -48,8 +48,8 @@ function getLoanApplications(){
                     const tdapplicationStatus = document.createElement('td')
                     tdapplicationStatus.innerText = data.applicationStatus.toString()
 
-                    const tdremarks= document.createElement('td')
-                    tdremarks.innerText = (data.remarks==undefined)?"-":data.remarks.toString()
+                    // const tdremarks= document.createElement('td')
+                    // tdremarks.innerText = (data.remarks==undefined)?"-":data.remarks.toString()
 
                     // const tdcusId = document.createElement('td')
                     // tdcusId.innerText = data.applicationDate.toString()
@@ -64,7 +64,7 @@ function getLoanApplications(){
                     tdImg.appendChild(imgEle)
 
                     const row = document.createElement('tr')
-                    row.append(tdId,tdcusId,tdloanId,tdloanAmount,tdinterestRate,tdtenure,tdapplicationDate,tdapplicationStatus,tdremarks,tdImg)
+                    row.append(tdId,tdcusId,tdloanId,tdloanAmount,tdinterestRate,tdtenure,tdapplicationDate,tdapplicationStatus,tdImg)
 
                     tableBody.append(row)
                 }

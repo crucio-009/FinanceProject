@@ -1,3 +1,4 @@
+var rate;
 const btnElement=document.getElementById('btnSubmit')
 btnElement.addEventListener('click',function(){
 
@@ -18,7 +19,6 @@ btnElement.addEventListener('click',function(){
         //now get the selected option object from the SELECT element
         const selectedOption = allOptions[index]
 
-
         const file = img1Element.files[0];
         const reader = new FileReader();
         
@@ -33,24 +33,28 @@ btnElement.addEventListener('click',function(){
                     loanId:selectedOption.value,
                     loanAmount:amtElement.value,
                     tenure:tenureElement.value,
-                    interestRate:5,
+                    interestRate:rate,
                     //applicationDate:'2023-08-18',
                     applicationStatus:'PENDING',
                     documentTwo:"null",
                     remarks:null,
                     documentOne:reader.result
                 }
+                console.log(data)
 
 
                 const req = new XMLHttpRequest()
                     req.onreadystatechange = function () {
                         if (req.status === 200 && req.readyState === 4) {
                             window.alert(req.responseText)
+                            window.open("myloanapplications.html","_self");
                         }
                     }
                 req.open('POST', 'http://localhost:8080/FinanceProjectAppDay2/rest/loan/applications/add', true)
                 req.setRequestHeader("Content-Type", "application/json")
                 req.send(JSON.stringify(data))
+
+
 
     })
     reader.readAsDataURL(file);
@@ -86,11 +90,32 @@ function getLoanTypes(){
 
 }
 
+function getRate(){
+    var loanSelected = Number(this.document.getElementById("inputType").value)
+    const req = new XMLHttpRequest()
+    req.onreadystatechange = async ()=> {
+        if (req.status === 200 && req.readyState === 4) {
+                const inteRate=await JSON.parse(req.responseText);
+                const intRate=inteRate.responseData;
+                console.log(intRate)
+                rate=intRate;
+                localStorage.setItem('interestrate',intRate);
+
+            }
+        }
+    req.open('GET', `http://localhost:8080/FinanceProjectAppDay2/rest/loans/get/rate/${loanSelected}`, true)
+    req.send()
+
+}
 
 window.addEventListener('DOMContentLoaded',
     function(){
         getLoanTypes()
-        
+        displayEmail()
+        this.document.getElementById("inputType").addEventListener("change",()=>{
+             getRate()
+        })
+       
     }
 )
 

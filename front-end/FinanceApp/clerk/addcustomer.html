@@ -7,10 +7,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/addcustomer.css">
     <script src="../requestConfig.js"></script>
+    <style>
+      .navbar-nav .nav-item.active .nav-link {
+        color: aqua
+    }
+    #loggedIn{
+      color: aqua;
+    }
+    </style>
 </head>
 <body>
   
-  <div class="container">
+  <div class="container-fluid">
     <nav class="navbar navbar-expand-lg bg-dark " data-bs-theme="dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="#" >GFC</a>
@@ -19,8 +27,8 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <a class="nav-link active" href="#">Add New Customer</a>
+              <li class="nav-item active">
+                <a class="nav-link " href="#">Add New Customer</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="./addloanapplication.html">New Loan Application</a>
@@ -30,6 +38,9 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="./loanapplicationdetails.html">View Loan Applications</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="btnlogout" href="../index.html" >Logout</a>
               </li>
               <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
@@ -42,7 +53,12 @@
                 </div>
               </li> -->
             </ul>
-            
+            <ul class="navbar-nav">
+              <li class="nav-item text-white text-end dispEmail">
+                <span id="loggedIn">Logged In As</span><br>
+                <span class="text-white" id="emailElement"></span>
+              </li>
+            </ul>
           </div>
         </div>
       </nav>
@@ -85,14 +101,14 @@
           </div>
         </div>
       </div>
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="inputAddress" class="form-label mt-4">Address</label>
         <textarea class="form-control" id="inputAddress" rows="3"></textarea>
       </div>
       <div class="form-group ">
         <label for="inputPincode" class="form-label mt-4">Pincode</label>
         <input type="number" class="form-control" id="inputPincode" placeholder="eg. 500090" autocomplete="off">
-      </div>
+      </div> -->
        <div class="btnElement ">
         <button type="button" class="btn btn-secondary mt-4 w-25 text-white " id="btnSubmit">Submit</button>
        </div>
@@ -104,5 +120,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="../scripts/addcustomer.js"></script> 
+    <script src="/logout.js"></script>>
 </body>
 </html>

@@ -46,8 +46,8 @@ function getLoanApplicationsByType(){
                     const tdapplicationStatus = document.createElement('td')
                     tdapplicationStatus.innerText = data.applicationStatus.toString()
 
-                    const tdremarks= document.createElement('td')
-                    tdremarks.innerText = (data.remarks==undefined)?"-":data.remarks.toString()
+                    // const tdremarks= document.createElement('td')
+                    // tdremarks.innerText = (data.remarks==undefined)?"-":data.remarks.toString()
 
                     // const tdcusId = document.createElement('td')
                     // tdcusId.innerText = data.applicationDate.toString()
@@ -90,12 +90,12 @@ function getLoanApplicationsByType(){
 
                     tdDeleteElement.appendChild(deleteButton);
                     const row = document.createElement('tr')
-                    row.append(tdId,tdloanId,tdloanAmount,tdinterestRate,tdtenure,tdapplicationDate,tdapplicationStatus,tdremarks,tdImg,tdDeleteElement)
+                    row.append(tdId,tdloanId,tdloanAmount,tdinterestRate,tdtenure,tdapplicationDate,tdapplicationStatus,tdImg,tdDeleteElement)
                     tableBody.append(row);
                     }
                     else{
                     const row = document.createElement('tr')
-                    row.append(tdId,tdloanId,tdloanAmount,tdinterestRate,tdtenure,tdapplicationDate,tdapplicationStatus,tdremarks,tdImg)
+                    row.append(tdId,tdloanId,tdloanAmount,tdinterestRate,tdtenure,tdapplicationDate,tdapplicationStatus,tdImg)
                     tableBody.append(row);
                     }
                 }
@@ -120,6 +120,9 @@ window
     )
 
 
+
+
+    
 
 // function getCustomerDetails(){
 //     const userId=localStorage.getItem('userid');

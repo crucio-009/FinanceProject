@@ -45,7 +45,7 @@ function getLoanApplications(){
 
                         req.onreadystatechange = () =>{
                         if (req.status === 200 && req.readyState === 4) {
-
+                            console.log(req.responseText)
                             window.alert("Loan Application Approved!");
                             //sendEmail(localStorage.getItem('customeremailid','Loan Application Approved','Congratulations!!, Your Loan Application has been approved.')
                             location.reload();          

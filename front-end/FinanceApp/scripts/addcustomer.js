@@ -19,7 +19,19 @@ btnElement.addEventListener('click',function(){
     sendAsyncRequest('POST',
     'http://localhost:8080/FinanceProjectAppDay2/rest/customers/add',
     function(resp){
-        window.alert(resp);
+        const response=JSON.parse(resp);
+        
+        if(response.responseData==true){
+            window.alert("Customer Added!");
+            window.open('customerdetails.html','_self')
+        }
+        else{
+            window.alert(resp);
+        }
+        
+        
+        
+
     },
     'application/json',
     data

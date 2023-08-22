@@ -9,10 +9,15 @@
     <!-- <link rel="stylesheet" href="">  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <style>
+            .navbar-nav .nav-item.active .nav-link {
+              color: aqua
+          }
+        </style>
 </head>
 
 <body>
-    <div class="container-fluid ps-5 pe-5 ">
+    <div class="container-fluid  ">
         <nav class="navbar navbar-expand-lg bg-dark " data-bs-theme="dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">GFC</a>
@@ -30,7 +35,16 @@
                         <li class="nav-item">
                             <a class="nav-link" href="pendingapplications.html">Approve/Reject Applications</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="btnlogout" href="../index.html">Logout</a>
+                          </li>
                     </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item text-white text-end dispEmail">
+                          <span id="loggedIn">Logged In As</span><br>
+                          <span class="text-white" id="emailElement"></span>
+                        </li>
+                      </ul>
 
                 </div>
             </div>
@@ -80,7 +94,7 @@
                     <th>Tenure</th>
                     <th>Application Date</th>
                     <th>Status</th>
-                    <th>Remarks</th>
+                    <!-- <th>Remarks</th> -->
 
                     <th>Document1</th>
                     <!-- <th>Document2</th> -->
@@ -103,6 +117,7 @@
             integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
             crossorigin="anonymous"></script>
         <script src="../scripts/loanapplicationsbyfilter.js"></script>
+        <script src="../logout.js"></script>
 </body>
 
 </html>

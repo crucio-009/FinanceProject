@@ -40,11 +40,20 @@ btnElement.addEventListener('click',function(){
                 documentOne:reader.result
             }
 
-
             const req = new XMLHttpRequest()
                 req.onreadystatechange = function () {
                     if (req.status === 200 && req.readyState === 4) {
-                        window.alert(req.responseText)
+                        
+                        const resp=JSON.parse(req.responseText)
+                        const flag=resp.responseData
+                        if(flag==true){
+                            window.alert("Loan Application Added!")
+                            window.open('loanapplicationdetails.html','_self')
+                        }
+                        else{
+                            window.alert(req.responseText)
+                        }
+                       
                     }
                 }
             req.open('POST', 'http://localhost:8080/FinanceProjectAppDay2/rest/loan/applications/add', true)
@@ -90,6 +99,7 @@ function getLoanTypes(){
 window.addEventListener('DOMContentLoaded',
     function(){
         getLoanTypes()
+        
         
     }
 )
